@@ -42,6 +42,8 @@ Before we extend the Weil height, we introduce the concept of the $p$-adic ordin
 	\]
 \end{definition}
 
+Using the definition of $p$-adic ordinal, we now provide the definition of the $p$-adic norm.
+
 \begin{definition}[$p$-adic Norm \cite{koblitz}]
 	Let $p$ be a prime and $x\in\QQ$.
 	Then the \textit{$p$-adic norm of $x$}, denoted $|x|_p$, is defined as
@@ -94,7 +96,14 @@ We want to show that following redefinition of the Weil height is equivalent to 
 	\]
 \end{proof}
 \begin{analysis}
-TODO
+	We begin by splitting up $h$ into the product of $p$-adic norms and the Euclidean norm.
+	From there, we notice that the product of $p$-adic norms is equal to $|d|$.
+	To prove this, we use the fact that the prime factorizations of $n$ and $d$ are finite and disjoint, we can break $r(\alpha)$ into the product of $r(n)$ and $r(1/d)$.
+	When we consider $r(n)$ we see that $|n|_p\leq 1$ for all primes $p$ and thus $\max\set{1,|n|_p}=1$.
+	When we consider $r(1/d)$, we see that $|1/d|_p\geq 1$ for all $p$ and thus, $\max\set{1,|1/d|_p}=|1/d|_p$.
+	For any prime not in $d$'s prime factorization, $|1/d|_p=1$, for those in $d$'s prime factorization, $|1/d|_p=p^{n_p}=\ord_p d$.
+	Thus, $r(1/d)=|d|$.
+	We then consider cases to get the result.
 \end{analysis}
 
 \printbibliography
