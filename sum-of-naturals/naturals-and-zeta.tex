@@ -1,0 +1,196 @@
+\documentclass[]{simple}
+
+\title{Sum of the Natural Numbers and the Riemann-Zeta Function}
+\date{January, 2016}
+\author{Matt McCarthy\\\href{mailto:matthew.mccarthy.12@cnu.edu}{matthew.mccarthy.12@cnu.edu}}
+
+\addbibresource{naturals-and-zeta.bib}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+We begin by introducing a rather interesting result, namely that the sum of the natural numbers is $-1/12$.
+\begin{thm}\label{wrong}
+	\[
+		\sum_{n=1}^\infty n = -\frac{1}{12}
+	\]
+\end{thm}
+We now provide the canonical proof as shown by \cite{wrong-pf}.
+\begin{proof}[Proof (\autoref{wrong})]
+	Define $s:=1+2+3+4+\ldots$, $s_1:=\sum_{n=0}^\infty(-1)^n$, and $s_2:=1-2+3-4+\ldots$.
+	If we consider $s_1$, when we stop after an odd number of terms, the partial sum is $1$ but when we stop after an even number of terms, the partial sum is zero.
+	Obviously, the series converges to the average of the two, thus $s_1=1/2$.
+	Consider $2s_2$.
+	\[
+	\begin{array}{rrrrrrr}
+		 &1 & -2 &+3 &-4&+\ldots\\
+		+&  &1   &-2 &+3&-4&+\ldots\\\hline
+		 &1 &-1  &+1 &-1&+\ldots
+	\end{array}
+	\]
+	Since $2s_2=s_1=1/2$, $s_2=1/4$.
+	Consider $s-s_2$.
+	\[
+		\begin{array}{rrrrrr}
+			&1&+2&+3&+4&+\ldots\\
+			-&1&-2&+3&-4&+\ldots\\\hline
+			&0&+4&+0&+8&+\ldots
+		\end{array}
+	\]
+	Moreover, we can factor out the four to get $s-s_2=4[1+2+3+\ldots]=4s$
+	Solving for $s$ then yields $s=-1/12$ and completes the proof.
+\end{proof}
+\begin{analysis}
+	The trick to this proof lies in exploiting the commutativity of addition.
+	By doing so, we can manipulate the subtraction of two infinite series into a single alternating series.
+	After that step, we then use the Taylor series we found in the lemma to complete the proof.
+\end{analysis}
+
+Now that we have ``shown'' that the natural numbers sum up to $-1/12$ the only things left to do are show that it is wrong and how this incorrect result came to be so prolific.
+
+\section{Refutation}
+
+We begin refuting this result by stating two of the limit laws and by providing the definition of an infinite series.
+\begin{thm}[Limit Laws]
+	Let $\set{x_n}_{n=1}^\infty$ and $\set{y_n}_{n=1}^\infty$ be real-valued sequences that converge to $x$ and $y$ respectively.
+	Then all of the following hold.
+	\begin{enumerate}
+		\item The sequence $\set{x_n+y_n}_{n=1}^\infty$ converges to $x+y$.
+		\item Let $k\in\RR$ then $\set{k\cdot x_n}_{n=1}^\infty$ converges to $k\cdot x$.
+	\end{enumerate}
+\end{thm}
+These laws should seem familiar, considering that we used both in our ``proof'' of \autoref{wrong} however we may have invoked them without respecting their hypotheses.
+
+\begin{definition}[Infinite Series]
+	Let $\set{x_k}_{k=1}^\infty$ be a sequence of real numbers and let $x\in\RR$.
+	An \textit{infinite series} is an expression of the form
+	\[
+		\sum_{k=1}^\infty x_k=x_1+x_2+\ldots.
+	\]
+	The corresponding \textit{sequence of partial sums} is defined by
+	\[
+		s_n:=\sum_{k=1}^n x_k.
+	\]
+	The series, $\sum_{k=1}^\infty x_k$ \textit{converges} to $x$ if and only if the sequence $\set{s_n}_{n=1}^\infty$ converges to $x$.
+\end{definition}
+This definition tells us that an infinite sum exists if and only if the its corresponding sequence of partial sums converges, which leads us to our biggest error: assuming the sum exists.
+
+To determine whether or not the sum exists, we need to consider the sequence of partial sums,
+\[
+	s_n:=\sum_{k=1}^n k.
+\]
+If we inspect the sequence long enough, we see that the sum only increases and is what we call a \textit{monotone increasing sequence}.
+\begin{definition}[Monotone Increasing Sequence]
+	Let $\set{x_n}_{n=1}^\infty$ be a real-valued sequence.
+	We say $\set{x_n}$ is \textit{monotone increasing} if and only if $x_n\leq x_{n+1}$ for each $n\in\NN$.
+\end{definition}
+If we consider the $(n+1)$ partial sum, we see
+\[
+	s_{n+1}=\sum_{k=1}^{n+1} k = \paren{\sum_{k=1}^{n} k} + (n+1) \geq \sum_{k=1}^{n} k=s_n.
+\]
+Thus, $\set{s_n}$ is a monotone increasing sequence.
+
+Since $s_n$ is monotone increasing, we have a very nice theorem that turns our limit problem into a boundedness problem.
+
+\begin{definition}[Upper Bound]
+	Let $\set{x_n}_{n=1}^\infty$ be a real valued sequence and let $b\in\RR$.
+	We say $b$ is an \textit{upper bound} of $\set{x_n}$ if and only if $x_n\leq b$ for each $n\in\NN$.
+	If any such $b$ exists, we say $\set{x_n}$ is \textit{bounded above}.
+\end{definition}
+
+\begin{thm}[Monotone Convergence Theorem]
+	Let $\set{x_n}_{n=1}^\infty$ be a real-valued monotone increasing sequence. Then $\set{x_n}$ converges if and only if $\set{x_n}$ is bounded above.
+\end{thm}
+
+With this theorem in our arsenal, we will now show that this infamous sum does not converge.
+
+\begin{proposition}
+	The sequence defined by
+	\[
+		s_n:=\sum_{k=1}^n k
+	\]
+	is unbounded.
+\end{proposition}
+\begin{proof}
+Assume that $s_n$ is bounded above.
+Ergo there exists a natural number $N > 0$ such that $s_n:=\sum_{k=1}^n k \leq N$ for every $n\in\NN$.
+We know that
+\[
+	s_n:=\sum_{k=1}^n k = \frac{n(n+1)}{2}.
+\]
+Consider $s_{2N}$.
+\[
+	s_{2N} = \frac{2N(2N+1)}{2}=N(2N+1)=2N^2+N>N
+\]
+The previous statement contradicts our assumption and thus $s_n$ is an unbounded sequence.
+\end{proof}
+\begin{analysis}
+	We perform a standard contradiction proof.
+	The only tricks we use are the fact that
+	\[
+		1+2+\ldots+n=\frac{n(n+1)}{2}
+	\]
+	and a careful selection of $n$.
+	Essentially, the proof boils down to picking a candidate for a bound and showing that we have a term in the sequence that is greater than our bound.
+\end{analysis}
+
+Since $s_n$ is unbounded, by the monotone convergence theorem, $s_n$ does not converge and neither does our sum.
+Thus, we cannot invoke limit laws in order to compute $-4s$ and $s-4s$ in our proof of \autoref{wrong}.
+In turn, this invalidates our derivation of $-3s$ which destroys the rest of the proof.
+
+\section{The Riemann-Zeta Function}
+
+To figure out why people believe this nonsense, we turn to the Riemann-Zeta function.
+Historically, the Riemann-Zeta function arose as a way to extend the Euler-Zeta function, defined on real numbers greater than 1
+\[
+	\zeta(s)=\sum_{n=1}^\infty \frac{1}{n^s}
+\]
+to the rest of the complex plane \cite{edwards}.
+When viewed in this light, one may think that
+\[
+	\zeta(-1)=\sum_{n=1}^\infty n.
+\]
+However, this is not the case since the Riemann-Zeta function is defined as follows.
+\begin{definition}[Riemann-Zeta Function from \cite{edwards}]
+	The \textit{Riemann-Zeta function} is the map $\zeta:\CC\rightarrow\CC$ defined by the contour integral
+	\[
+		\zeta(s):=\frac{\Pi(-s)}{2\pi i}\int_\gamma\frac{(-x)^s}{(e^x-1)x}dx
+	\]
+	where $\gamma$ is a curve that starts at $+\infty$, moves towards the origin along the positive real axis, circles the origin in a counterclockwise direction, and returns to $+\infty$ along the positive real axis.
+	Furthermore, $\Pi(s)$ is defined as
+	\[
+		\Pi(s):=\int_0^\infty e^{-x}x^s dx.
+	\]
+\end{definition}
+
+As we can see from the definition, this function does not resemble the geometric series in any way.
+However, if $s$ is real and greater than $1$ (note: strictly greater than, not greater than or equal to) the zeta function can be written as
+\begin{equation}\label{zeta-series}
+	\zeta(s)=\sum_{n=1}^\infty\frac{1}{n^s}.
+\end{equation}
+Furthermore, since $-1$ is less than $1$,
+\[
+	\zeta(-1)\neq\sum_{n=1}^\infty n.
+\]
+
+Another interesting property of the Riemann-Zeta function pops up when we let $s$ be a negative integer.
+\begin{proposition}[From \cite{edwards}]
+	For any natural number $n$,
+	\[
+		\zeta(-n)=(-1)^n\frac{B_{n+1}}{n+1}
+	\]
+	where $B_{n+1}$ is the $n+1$th Bernoulli number.
+\end{proposition}
+By using this property we get
+\begin{equation}\label{zeta-1}
+	\zeta(-1)=(-1)\frac{B_2}{2}=(-1)\paren{\frac{1}{6}}\paren{\frac{1}{2}}=-\frac{1}{12}.
+\end{equation}
+
+Very likely, the incorrect conclusion that $1+2+3+\ldots=-1/12$ came out of some confusion arising from \autoref{zeta-series}, \autoref{zeta-1}, and the history of the zeta function.
+
+\printbibliography
+
+\end{document}

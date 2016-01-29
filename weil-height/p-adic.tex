@@ -1,0 +1,102 @@
+\documentclass[notitlepage]{simple}
+
+\def\ord{\operatorname{ord}}
+
+\title{Weil Height and the $p$-adic Numbers}
+\date{January 2016}
+\author{Matt McCarthy\\\href{mailto:matthew.mccarthy.12@cnu.edu}{matthew.mccarthy.12@cnu.edu}}
+
+\addbibresource{p-adic.bib}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+Height functions generally measure the complexity of a number.
+In particular, the Weil height measure the complexity of a rational number as follows.
+
+\begin{definition}\label{weil1}
+	Let $x=m/n\in\QQ$, then the \textit{Weil height of $x$}, denoted $h(x)$, is defined as
+	\[
+		h(x)=\max\set{|m|,|n|}.
+	\]
+\end{definition}
+
+As nice as this height function is, we would like to have a natural extension to other spaces, like the algebraics, where measuring the Euclidean distance of the numerators and denominators makes less sense.
+
+\section{Background}
+
+Before we extend the Weil height, we introduce the concept of the $p$-adic ordinal and norm.
+
+\begin{definition}[$p$-adic Ordinal \cite{koblitz}]
+	Let $p$ be a prime and let $a\in\ZZ$.
+	Then the \textit{$p$-adic ordinal} of $a$, denoted $\ord_p a$, is defined as
+	\[
+		\ord_p a = \max\set{n\text{ s.t. } p^n | a}.
+	\]
+	Furthermore, for any $x=b/c\in\QQ$,
+	\[
+		\ord_p x = \ord_p a - \ord_p b.
+	\]
+\end{definition}
+
+\begin{definition}[$p$-adic Norm \cite{koblitz}]
+	Let $p$ be a prime and $x\in\QQ$.
+	Then the \textit{$p$-adic norm of $x$}, denoted $|x|_p$, is defined as
+	\[
+		|x|_p =
+		\begin{cases}
+			p^{-\ord_p x} & x\neq 0\\
+			0 & x=0.
+		\end{cases}
+	\]
+\end{definition}
+
+\section{Problem}
+
+We want to show that following redefinition of the Weil height is equivalent to \autoref{weil1}
+
+\begin{thm}
+	Let $\alpha=n/d\in\QQ$ with $n\neq 0$ and $\gcd(n,d)=1$.
+	Define $h(\alpha)=\paren{\prod_p \max\set{1,|\alpha|_p}}\paren{\max\set{1,|\alpha|}}$.
+	Then $h(\alpha)=\max\set{|n|,|d|}$.
+\end{thm}
+\begin{proof}
+	Define $r(\alpha):=\prod_p \max\set{1,|\alpha|_p}$, then $h(\alpha)=r(\alpha)\cdot\paren{\max\set{1,|\alpha|}}$.
+	Since $|n|,|d|\in\ZZ^+$, $|n|=\prod_{i=1}^k p_i^{n_i}$ and $|d|=\prod_{i=1}^j q_i^{m_i}$ where $\set{p_i}$ and $\set{q_i}$ are finite sets of prime numbers and $\set{n_i},\set{m_i}\subset\NN$.
+	Furthermore, $\set{p_i}\cap\set{q_i}=\emptyset$ since $\gcd(n,d)=1$.
+	Therefore,
+	\begin{align*}
+		r(\alpha)
+		&=r\paren{\paren{\prod_{p_i} p_i^{n_i}}\paren{\prod_{q_i} q_i^{-m_i}} }\\
+		&=\paren{\prod_{p_i} \max\set{1,|\alpha|_{p_i}}}\paren{\prod_{q_i} \max\set{1,|\alpha|_{q_i}}}\\
+		&=\paren{\prod_{p_i} \max\set{1,p_i^{-n_i}}}\paren{\prod_{q_i} \max\set{1,q_i^{m_i}}}\\
+		&=1\cdot\prod_{q_i} q_i^{m_i}\\
+		&=|d|.
+	\end{align*}
+	Thus,
+	\[
+		h(\alpha)=|d|\cdot\max\set{1,|n/d|}.
+	\]
+	If $n<d$,
+	\[
+		h(\alpha) = |d|\cdot 1 = \max\set{|n|,|d|}.
+	\]
+	If $n=d$,
+	\[
+		h(\alpha) = |d| =\max\set{|n|,|d|}.
+	\]
+	Otherwise, $n> d$ and
+	\[
+		h(\alpha) = |d|\frac{|n|}{|d|}=|n|=\max{|n|,|d|}.
+	\]
+\end{proof}
+\begin{analysis}
+TODO
+\end{analysis}
+
+\printbibliography
+
+\end{document}
