@@ -9,8 +9,36 @@
 
 \section{Statement of Problem}
 
+Define $f(x):=\arctan x$.
+Find $f^{(n)}(0)$.
+
 \section{Background}
 
+For this problem we will need two theorems.
+Firstly, we need Taylor's Theorem.
+\begin{thm}[Taylor's Theorem on a disk in $\CC$]
+	Let $f:\CC\rightarrow\CC$ be analytic on a disk of radius $r$ about $z_0$.
+	Then there exists a unique power series such that
+	\[
+		f(z)=\sum_{k=0}^\infty \frac{f^{(k)}(z_0)}{k!}(z-z_0)^k
+	\]
+	for all $z$ such that $|z-z_0|<r$.
+\end{thm}
+Furthermore, we need an additional Taylor expansion.
+\begin{thm}
+	Define
+	\[
+		f(z):=\frac{1}{1-z^2}.
+	\]
+	Then,
+	\[
+		f(z)=\sum_{k=0}^\infty z^k
+	\]
+	for any $z\in\CC$ with $|z|<1$.
+\end{thm}
+
 \section{Solution}
+
+
 
 \end{document}
