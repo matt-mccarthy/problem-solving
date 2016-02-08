@@ -16,7 +16,7 @@ Find $f^{(n)}(0)$.
 
 For this problem we will need two theorems.
 Firstly, we need Taylor's Theorem.
-\begin{thm}[Taylor's Theorem on a disk in $\CC$]
+\begin{thm}[Taylor's Theorem on a disk in $\CC$]\label{t-thm}
 	Let $f:\CC\rightarrow\CC$ be analytic on a disk of radius $r$ about $z_0$.
 	Then there exists a unique power series such that
 	\[
@@ -25,10 +25,10 @@ Firstly, we need Taylor's Theorem.
 	for all $z$ such that $|z-z_0|<r$.
 \end{thm}
 Furthermore, we need an additional Taylor expansion.
-\begin{thm}
+\begin{thm}\label{t-exp}
 	Define
 	\[
-		f(z):=\frac{1}{1-z^2}.
+		f(z):=\frac{1}{1-z}.
 	\]
 	Then,
 	\[
@@ -39,6 +39,25 @@ Furthermore, we need an additional Taylor expansion.
 
 \section{Solution}
 
-
-
+Define $g(x):=f'(x)$.
+We know that
+\[
+	g(x)=f'(x)=\frac{1}{1+x^2} = \frac{1}{1-(-x^2)}.
+\]
+From here we can invoke \autoref{t-exp} to get
+\[
+	g(x) = \sum_{n=0}^\infty (-x^2)^n = \sum_{n=0}^\infty (-1)^n (x-0)^{2n}.
+\]
+Furthermore, we know that this power series representation is unique by \autoref{t-thm}.
+Thus,
+\[
+	g(x)=\sum_{n=0}^\infty \frac{g^{(n)}(0)}{n!}(x-0)^n=\sum_{n=0}^\infty (-1)^n (x-0)^{2n}.
+\]
+Using \autoref{t-thm}, we notice that $g^{(2n+1)}(0)=0$ since no odd terms appead in the Taylor expansion.
+Moreover, by \autoref{t-thm} we get
+\[
+	\frac{g^{(2n)}(0)}{(2n)!}=(-1)^n.
+\]
+Therefore, $g^{(2n)}(0)=(-1)^n(2n)!$.
+However, by definition of $g=f'$, we have $f^{(2n+2)}(0)=0$ and $f^{(2n+1)}(0)=(-1)^n(2n)!$.
 \end{document}
