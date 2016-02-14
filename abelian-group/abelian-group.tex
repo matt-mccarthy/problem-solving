@@ -1,0 +1,59 @@
+\documentclass[notitlepage]{simple}
+
+\author{Matt McCarthy}
+\date{February 2016}
+\title{Test for Abelian Groups}
+
+\begin{document}
+	\maketitle
+	\begin{definition}
+		Let $S$ be a set.
+		Then a \textit{binary operation on $S$} is a map $*:S\times S\rightarrow S$.
+	\end{definition}
+	\begin{definition}
+		Let $G$ be a set and $*$ be a binary operation on $G$.
+		Then $(G,*)$ is a \textit{group} if and only if all of the following hold.
+		\begin{enumerate}
+			\item For each $a,b,c\in G$, $(a*b)*c=a*(b*c)$.
+			\item There exists a $1\in G$ such that for every $a\in G$ $1* a=a* 1=a$.
+			\item For each $a\in G$ there exists a $a^{-1}\in G$ such that $a*a^{-1}=a^{-1}*a=1$.
+		\end{enumerate}
+	\end{definition}
+	\begin{definition}
+		Let $(G,\cdot)$ be a group.
+		Then we say $G$ is \textit{abelian} if and only if for each $a,b\in G$ $ab=ba$.
+	\end{definition}
+	\begin{thm}
+		Suppose $(G,\cdot)$ is a group such that there exists an $n\in\NN$ where $(ab)^n=a^nb^n$, $(ab)^{n+1}=a^{n+1}b^{n+1}$, and $(ab)^{n+2}=a^{n+2}b^{n+2}$ for each $a,b\in G$.
+		Then $G$ is abelian.
+	\end{thm}
+	\begin{proof}
+		Consider $a^{n+1}b^{n+1}$.
+		\[
+			a^{n+1}b^{n+1} = (ab)^{n+1}=(ab)^n(ab)=a^nb^nab
+		\]
+		If we multiply on the right by $a^{-n}$ and the left by $b^{-1}$, we get
+		\[
+			ab^n=b^na.
+		\]
+		Consider $a^{n+2}b^{n+2}$.
+		\[
+			a^{n+2}b^{n+2} = (ab)^{n+1}=(ab)^{n+1}(ab)=a^{n+1}b^{n+1}ab
+		\]
+		Again, multiplying on the right $a^{-(n+1)}$ and on the right by $b^{-1}$ yields,
+		\[
+			ab^{n+1}=b^{n+1}a.
+		\]
+		We now do some manipulation.
+		\begin{align*}
+			ab^{n+1}&=b^{n+1}a\\
+			&=b(b^na)\\
+			&=b(ab^n)
+		\end{align*}
+		Multiplying on the right by $b^{-n}$ yields,
+		\[
+			ab=ba
+		\]
+		and thus $G$ is abelian.
+	\end{proof}
+\end{document}
