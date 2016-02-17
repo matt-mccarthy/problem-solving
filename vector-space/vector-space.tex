@@ -1,0 +1,76 @@
+\documentclass[notitlepage]{simple}
+
+\author{Matt McCarthy}
+\title{Vector Space Isomorphisms}
+\date{February 2016}
+
+\begin{document}
+	\maketitle
+
+	\begin{thm}
+		Let $V,W$ be vector spaces over a field $\FF$ and $\tau: V\rightarrow W$ be a homomorphism.
+		Then $\tau$ is an isomorphism if and only if $\tau$ takes a basis of $V$ to a basis of $W$.
+	\end{thm}
+	\begin{proof}
+		Let $B$ be a basis of $V$.
+
+		$\Rightarrow$ Assume $\tau$ is an isomorphism.
+		We want to show $\tau(B)$ is a basis of $W$.
+		Therefore we need to show that $\tau(B)$ is linearly independent and spans $W$.
+		Let $\set{\tau(v_1),\tau(v_2),\ldots,\tau(v_n)}\subseteq\tau(B)$ and $\set{a_1,a_2,\ldots,a_n}\subseteq\FF$ such that
+		\[
+			a_1\tau(v_1)+a_2\tau(v_2)+\ldots+a_n\tau(v_n)=0.
+		\]
+		By properties of vector space homomorphisms, we know that
+		\[
+			\tau(a_1v_1+\ldots+a_nv_n)=0
+		\]
+		and thus,
+		\[
+			a_1v_1+\ldots +a_nv_n\in\ker\tau.
+		\]
+		However, since $\tau$ is an isomorphism, $\tau$ is injective which directly implies that $\ker\tau=\set{0}$.
+		Therefore,
+		\[
+			a_1v_1+\ldots +a_nv_n = 0
+		\]
+		and since $B$ is linearly independent, $\set{a_1,\ldots,a_n}=\set{0}$.
+		Therefore, $\tau(B)$ is linearly independent.
+		Let $w\in W$.
+		Since $\tau$ is an isomorphism, $\tau$ is surjective.
+		Therefore, there exists a $v\in V$ such that $w=\tau(v)$.
+		However $B$ spans $V$ and thus, there exist $\set{v_1,\ldots,v_n}\subseteq B$ and $\set{a_1,\ldots,a_n}\subseteq\FF$ such that
+		\[
+			v=a_1v_1+\ldots+a_nv_n.
+		\]
+		Therefore,
+		\begin{align*}
+			w &= \tau(v)\\
+			&=\tau(a_1v_1+\ldots+a_nv_n)\\
+			&=a_1\tau(v_1)+\ldots +a_n\tau(v_n).
+		\end{align*}
+		Ergo, $\tau(B)$ spans $W$.
+
+		$\Leftarrow$ Assume $\tau(B)$ is a basis.
+		We need to show that $\tau$ is injective and surjective.
+		Let $v\in\ker\tau$.
+		Since $v\in V$,
+		\[
+			v=a_1v_1+\ldots+a_nv_n
+		\]
+		for some $\set{a_1,\ldots,a_n}\subseteq\FF$ and $\set{v_1,\ldots,v_n}\subseteq V$.
+		Therefore,
+		\[
+			0 = \tau(v)=\tau(a_1v_1+\ldots+a_nv_n)=a_1\tau(v_1)+\ldots+a_n\tau(v_n).
+		\]
+		Since $\tau(B)$ is a basis, we know that $\set{a_1,\ldots,a_n}=\set{0}$.
+		Thus, $\ker\tau=\set{0}$ and $\tau$ is injective.
+		Let $w\in W$.
+		Since $\tau(B)$ is a basis, there exist $\set{a_1,\ldots,a_n}\subseteq\FF$ and $\set{\tau(v_1),\ldots,\tau(v_n)}\subseteq \tau(B)$ such that
+		\[
+			w=a_1\tau(v_1)+\ldots +a_n\tau(v_n)=\tau(a_1v_1+\ldots+a_nv_n)
+		\]
+		which is an element of $V$.
+		Ergo, $\tau$ is surjective and thus $\tau$ is a vector space isomorphism.
+	\end{proof}
+\end{document}
