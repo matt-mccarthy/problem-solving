@@ -1,11 +1,175 @@
 \documentclass[notitlepage]{simple}
 
+\def\spann{\operatorname{span}}
+
 \author{Matt McCarthy}
 \title{Vector Space Isomorphisms}
 \date{February 2016}
 
 \begin{document}
 	\maketitle
+
+	\begin{thm*}
+		Let $V,W$ be vector spaces over a field $\FF$ and $\tau: V\rightarrow W$ be a homomorphism.
+		Then $\tau$ is an isomorphism if and only if $\tau$ takes a basis of $V$ to a basis of $W$.
+	\end{thm*}
+
+	Before we can talk about vector spaces, let alone vector space isomorphisms and bases, we need to define the terms field and vector space.
+
+	\begin{definition}[Field]
+		Let $\FF$ be a set and let $+$ and $\cdot$ be binary operations on $\FF$.
+		Then we say $\FF$ is a \textit{field} if and only if all of the following hold.
+		\begin{enumerate}
+			\item $(\FF,+)$ forms an abelian group (we call its identity 0).
+			\item $(\FF\setminus\set{0},\cdot)$ forms an abelian group (we call its identity 1).
+			\item For any $x\in\FF$, $0\cdot x = 0$.
+			\item For any $x,y,z\in\FF$, $(x+y)\cdot z= (x\cdot z)+(y\cdot z)$.
+		\end{enumerate}
+	\end{definition}
+
+	In short, a field is a set with two operations that behaves like the rational numbers.
+	That is, we can add, subtract, multiply, and divide as we see fit.
+	A vector space ``extends'' the properties of a field further.
+
+	\begin{definition}[Vector Space]
+		A \textit{vector space} $V$ over a field $\FF$ is a set with two binary operations, $+:V\times V\rightarrow V$ and $\cdot:V\times\FF\rightarrow V$ such that all of the following hold.
+		\begin{enumerate}
+			\item $(V,+)$ forms an abelian group with identity 0.
+			\item For all $x\in V$, $1x=x$.
+			\item For all $a,b\in\FF$ and $x\in V$, $a(bx)=(ab)x$.
+			\item For all $a\in\FF$ and $x,y\in V$, $a(x+y)=ax+ay$.
+			\item For all $a,b\in\FF$ and $x\in V$, $(a+b)x=ax+bx$.
+		\end{enumerate}
+		Furthermore, $x+y$ is called the \textit{sum of $x$ and $y$} while $ax$ is called the \textit{product of $x$ and $a$}.
+		Moreover, each $x\in V$ is called a \textit{vector} and each $a\in\FF$ is called a \textit{scalar}.
+	\end{definition}
+
+	Now that we have a definition for vector space, we can build the definition of a basis.
+	To get there, we must first talk about sets that span a vector space and linearly independent sets.
+
+	\begin{definition}[Spanning Set]
+		Let $V$ be a vector space over a field $\FF$ and let $S$ be a nonempty subset of $V$.
+		Then, the \textit{span of $S$}, denoted $\spann S$, is the set
+		\[
+			\spann S = \set{\sum_{j=1}^n a_j s_j | \set{a_j}_{j=1}^n\subseteq\FF, \set{s_j}_{j=1}^n\subseteq S, n<\infty}
+		\]
+		or the set of linear combinations of elements of $S$.
+		We define $\spann\emptyset = \set{0}$.
+	\end{definition}
+
+	\begin{definition}[Span]
+		A subset $S$ of a vector space $V$ \textit{spans $V$} if and only if $\spann S=V$.
+	\end{definition}
+
+	Essentially, a set spans the space if every element in the space can be written as a linear combination of elements in the set.
+	Now that we can span a space, we need the spanning set to be what we call linearly independent.
+
+	\begin{definition}[Linear Independence]
+		A subset $S$ of a vector space $V$ over a field $\FF$ is \textit{linearly independent} if and only if for any $\set{x_j}_{j=1}^n\subseteq V$ where $n<\infty$ the statement
+		\[
+			\sum_{j=1}^n a_jx_j=0
+		\]
+		implies that $\set{a_j}=\set{0}$, where $\set{a_j}\subseteq\FF$.
+		Furthermore, if $S$ is not linearly independent, we say that $S$ is \textit{linearly dependent}.
+	\end{definition}
+
+	\begin{definition}[Basis of a Vector Space]
+		A \textit{basis} $B$ for a vector space $V$ is a a linearly independent subset of $V$ that spans $V$.
+	\end{definition}
+
+	Bases are important because they allow us to represent the entire space (which is potentially uncountably infinite) using a countable number of vectors.
+	Moreover, every vector space has a basis which means we can do this for any space.
+
+	We now switch gears and talk about homomorphisms and isomorphisms of vector spaces.
+
+	\begin{definition}[Homomorphism of Vector Spaces]
+		Let $V,W$ be vector spaces over a field $\FF$ and let $\tau:V\rightarrow W$ be a map.
+		We say $\tau$ is a \textit{homomorphism} if and only if for all $v,w\in V$ and $a,b\in\FF$,
+		\[
+			\tau(av+bw) = a\tau(v)+b\tau(w).
+		\]
+	\end{definition}
+	\begin{definition}[Kernel of a Homomorphism]
+		Let $\tau:V\rightarrow W$ be a vector space homomorphism.
+		Then the \textit{kernel of $\tau$} is defined as,
+		\[
+			\ker\tau=\set{x\in V \text{ s.t } \tau(x)=0}.
+		\]
+	\end{definition}
+
+	More generally, a morphism in algebra is a map that ``preserves operation'' in some fashion.
+	Furthermore, the kernel of a homomorphism is simply the set of everything in the domain that gets mapped to zero.
+	However, homomorphisms are not quite as strong as what we want.
+	Therefore, we define the following properties.
+
+	\begin{definition}[Surjective and Injective Maps]
+		Let $S,R$ be nonempty sets and let $f:S\rightarrow R$ be a map.
+		We say $f$ is \textit{injective} if and only if the equation
+		\[
+			f(x)=f(y)
+		\]
+		implies that $x=y$.
+		We say $f$ is \textit{surjective} if and only if for each $r\in R$, there exists an $s\in S$ such that $r=f(s)$.
+		If $f$ is both injective and surjective, we say that $f$ is \textit{bijective}.
+	\end{definition}
+
+	Essentially, an injective map takes each input to a different output while a surjective map has an input for each output.
+	If we let our homomorphism be bijective, then it is an isomorphism.
+
+	\begin{definition}[Isomorphism of Vector Spaces]
+		Let $V,W$ be vector spaces over a field $\FF$ and let $\tau:V\rightarrow W$ be a homomorphism.
+		We say that $\tau$ is an \textit{isomorphism} if and only if $\tau$ is bijective.
+	\end{definition}
+
+	If two vector spaces are isomorphic, they are essentially a relabeling of each other.
+	That is the element of each vector space are the same object in different clothes.
+
+	To get to the proof of the original theorem, we need to show a couple of propositions.
+	The first of which is that any homomorphism maps 0 to 0.
+
+	\begin{proposition}
+		Let $\tau:V\rightarrow W$ be a vector space homomorphism.
+		Then $\tau(0)=0$.
+	\end{proposition}
+	\begin{proof}
+		\[
+			\tau(0)=\tau(0+0)=\tau(0)+\tau(0).
+		\]
+		If we subtract $\tau(0)$ from both sides we get,
+		\[
+			\tau(0)=0.
+		\]
+	\end{proof}
+
+	Additionally, for homomorphisms we have an equivalent condition for injectivity.
+
+	\begin{proposition}
+		Let $\tau:V\rightarrow W$ be a vector space homomorphism.
+		Then $\tau$ is injective if and only if $\ker\tau=\set{0}$.
+	\end{proposition}
+	\begin{proof}
+		$\Rightarrow$ Assume $\tau$ is injective.
+		Let $x\in\ker\tau$.
+		Then $\tau(x)=0$.
+		Furthermore, we know $\tau(0)=0$.
+		Therefore, $\tau(x)=\tau(0)$ and since $\tau$ is injective, $x=0$.
+		Ergo, $\ker\tau=\set{0}$.
+
+		\noindent $\Leftarrow$ Assume $\ker\tau=\set{0}$.
+		Let $x,y\in V$ such that $\tau(x)=\tau(y)$.
+		Then
+		\[
+			\tau(x)-\tau(y)=0
+		\]
+		and by properties of homomorphisms,
+		\[
+			\tau(x-y)=0.
+		\]
+		Therefore $x-y\in\ker\tau$ and $x-y=0$.
+		Thus, $x=y$ and $\tau$ is injective.
+	\end{proof}
+
+	With these two propositions, we can begin the proof of the main theorem.
 
 	\begin{thm}
 		Let $V,W$ be vector spaces over a field $\FF$ and $\tau: V\rightarrow W$ be a homomorphism.
@@ -51,7 +215,7 @@
 		\end{align*}
 		Ergo, $\tau(B)$ spans $W$.
 
-		$\Leftarrow$ Assume $\tau(B)$ is a basis.
+		\noindent $\Leftarrow$ Assume $\tau(B)$ is a basis.
 		We need to show that $\tau$ is injective and surjective.
 		Let $v\in\ker\tau$.
 		Since $v\in V$,
