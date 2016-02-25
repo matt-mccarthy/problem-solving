@@ -1,0 +1,110 @@
+\documentclass[notitlepage]{simple}
+
+\author{Matt McCarthy}
+\title{Completeness of $\RR$}
+\date{Februrary 2016}
+
+\begin{document}
+
+\maketitle
+
+\begin{thm*}
+	The real numbers form a complete metric space.
+\end{thm*}
+
+We denote the set of non-negative real numbers as $\RR^+$.
+
+\begin{definition}[Metric]
+	Let $X$ be a set and $d:X\times X\rightarrow \RR^+$ be a map.
+	We say $d$ is a \textit{metric} if and only if all of the following hold.
+	\begin{enumerate}
+		\item For all $x,y\in X$, $d(x,y)=0$ if and only if $x=y$.
+		\item For all $x,y\in X$, $d(x,y)=d(y,x)$ (symmetric property).
+		\item For all $x,y,z\in X$, $d(x,z)\leq d(x,y)+d(y,x)$ (triangle inequality).
+	\end{enumerate}
+	If $d$ is a metric on $X$, we say $(X,d)$ forms a \textit{metric space}.
+\end{definition}
+
+For example, $(\QQ,d)$ and $(\RR,d)$ where $d(x,y)=\abs{x-y}$ is a metric space,
+and more generally, $(\RR^n, d_n)$ where $d_n$ is the Euclidean distance is also a metric space.
+
+\begin{definition}[Convergent Sequence]
+	Let $(X,d)$ be a metric space and let $\set{a_n}_{n\in\NN}$ be a sequence in $X$.
+	We say $\set{a_n}_{n\in\NN}$ \textit{converges} to some $a\in X$, denoted $a_n\rightarrow a$ if and only if for all $\varepsilon>0$ there exists a $N_\varepsilon\in\NN$ such that $d(a_n,a)<\varepsilon$ for all $n\geq N_\varepsilon$.
+\end{definition}
+
+\begin{definition}[Cauchy Sequence]
+	Let $(X,d)$ be a metric space and let $\set{a_n}_{n\in\NN}$ be a sequence in $X$.
+	We say $\set{a_n}_{n\in\NN}$ is a \textit{Cauchy sequence} if and only if for any $\varepsilon>0$, there exists a $N_\varepsilon\in\NN$ such that $d(a_n,a_m)<\varepsilon$ for all $n,m\geq N_\varepsilon$.
+\end{definition}
+
+Note, however that Cauchy sequences are not always convergent in their space.
+For example consider the sequence given by
+\[
+	a_n = \paren{1+\frac{1}{n}}^n.
+\]
+We know these terms are rational and thus $a_n$ is a $\QQ$-valued sequence.
+Furthermore, the sequence is in fact Cauchy.
+However, the limit of this sequence as $n$ approaches infinity is $e$ and thus, this Cauchy sequence does not converge in $\QQ$, but it does in $\RR$.
+
+This leads us to a notion of \textit{completeness} in a metric space.
+
+\begin{definition}[Complete Metric Space]
+	Let $(X,d)$ be a metric space.
+	Then we say $(X,d)$ is \textit{complete} if and only if every Cauchy sequence in $X$ converges in $X$.
+\end{definition}
+By this definition of completeness, $\QQ$ is not complete as shown by our prior example.
+However, $\RR$ is complete.
+
+Before we get into any theorems here, we need a notion of \textit{boundedness} for subsets of the real numbers.
+
+\begin{definition}[Bounded]
+	Let $S$ be a subset of the real numbers.
+	Then $S$ is \textit{bounded} if and only if there exists an $M>0$ such that $S\subseteq [-M,M]$.
+\end{definition}
+
+\begin{thm}[Bolzano-Weierstrass]
+	Let $\set{a_n}_{n\in\NN}$ be a bounded $\RR$-valued sequence.
+	Then there exists a $\set{a_{n_k}}\subseteq\set{a_n}$ such that $a_{n_k}$ converges to some $a\in\RR$.
+\end{thm}
+\begin{proof}
+
+\end{proof}
+
+\begin{lemma}
+	Any $\RR$-valued Cauchy sequence is bounded.
+\end{lemma}
+\begin{proof}
+	Let $\varepsilon >0$ be given and let $\set{a_n}_{n\in\NN}$ be a Cauchy sequence in $\RR$.
+	Therefore, there exists an $N_\varepsilon$ such that $|a_n-a_m|<\varepsilon$ for all $n,m\geq N_\varepsilon$.
+	Therefore, for all $n\geq N_\varepsilon$, $|a_{N_\varepsilon}-a_n|<\varepsilon$.
+	Thus for each $n\geq N_\varepsilon$, $a_n\in[a_{N_\varepsilon}-\varepsilon,a_{N_\varepsilon}+\varepsilon]$.
+	Take $M_1=\max\set{a_{N_\varepsilon}-\varepsilon,a_{N_\varepsilon}+\varepsilon}$, which yields $\set{a_n}_{n=N_\varepsilon}^\infty\subset[-M_1,M_1]$.
+
+	Furthermore, since $\set{a_n}_{n=1}^{N_\varepsilon-1}$ is finite, take $M_2=\max\set{|a_n|}_{n=1}^{N_\varepsilon-1}$.
+	Thus, $\set{a_n}_{n=1}^{N_\varepsilon-1}\subset [-M_2,M_2]$.
+	If we take $M=\max\set{M_1,M_2}$, then we have $\set{a_n}_{n\in\NN}\subset[-M,M]$.
+	Therefore, the sequence is bounded.
+\end{proof}
+
+\begin{thm}
+	The real numbers form a complete metric space.
+\end{thm}
+\begin{proof}
+	Let $\set{a_n}_{n\in\NN}$ be Cauchy in $\RR$.
+	Let $\varepsilon > 0$ be given.
+	Since $\set{a_n}_{n\in\NN}$ is Cauchy there exists an $N_{\varepsilon/2}\in\NN$ such that $|a_n-a_m|<\varepsilon/2$ for all $n,m\geq N_{\varepsilon/2}$.
+	Furthermore, $\set{a_n}_{n\in\NN}$ is bounded and thus by Bolzano-Weierstrass, there exists a $\set{a_{n_k}}_{k\in\NN}\subset\set{a_n}_{n\in\NN}$ such that $a_{n_k}$ converges to some $a\in\RR$.
+
+	We claim that $a_n$ converges to $a$.
+	Since $a_{n_k}$ converges to $a$, there exists a $K_{\varepsilon/2}\in\NN$ such that $|a_{n_k}-a|<\varepsilon/2$ for all $k\geq K_{\varepsilon/2}$.
+	Take $N=\max\set{N_{\varepsilon/2},n_{K_{\varepsilon/2}}}$ and force $n,k$ large enough such that $n,n_k\geq N$.
+	Consider $|a_n-a|$.
+	\[
+		|a_n-a|=|a_n-a_{n_k}+a_{n_k}-a|\leq |a_n-a_{n_k}|+|a_{n_k}-a|<\frac{\varepsilon}{2}+\frac{\varepsilon}{2}=\varepsilon
+	\]
+	Thus for any $\varepsilon >0$, there exists an $N\in\NN$ such that $|a_n-a|<\varepsilon$ for all $n\geq N$.
+	Therefore $a_n$ converges to $a$ and $\RR$ is a complete metric space.
+\end{proof}
+
+\end{document}
