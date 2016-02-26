@@ -12,7 +12,9 @@
 	The real numbers form a complete metric space.
 \end{thm*}
 
-We denote the set of non-negative real numbers as $\RR^+$.
+\noindent Notation: We denote the set of non-negative real numbers as $\RR^+$.
+
+We begin by providing a way to measure distances in a space.
 
 \begin{definition}[Metric]
 	Let $X$ be a set and $d:X\times X\rightarrow \RR^+$ be a map.
@@ -27,11 +29,15 @@ We denote the set of non-negative real numbers as $\RR^+$.
 
 For example, $(\QQ,d)$ and $(\RR,d)$ where $d(x,y)=\abs{x-y}$ is a metric space,
 and more generally, $(\RR^n, d_n)$ where $d_n$ is the Euclidean distance is also a metric space.
+Now that we have a way to talk about distances in spaces we can talk about convergence of sequences in those spaces.
 
 \begin{definition}[Convergent Sequence]
 	Let $(X,d)$ be a metric space and let $\set{a_n}_{n\in\NN}$ be a sequence in $X$.
 	We say $\set{a_n}_{n\in\NN}$ \textit{converges} to some $a\in X$, denoted $a_n\rightarrow a$ if and only if for all $\varepsilon>0$ there exists a $N_\varepsilon\in\NN$ such that $d(a_n,a)<\varepsilon$ for all $n\geq N_\varepsilon$.
 \end{definition}
+
+However, convergence is often too strong a condition to prove, and moreover convergence also requires a proposed limit.
+Therefore, we introduce the notion of a \textit{Cauchy Sequence} where the terms get arbitrarily close to each other.
 
 \begin{definition}[Cauchy Sequence]
 	Let $(X,d)$ be a metric space and let $\set{a_n}_{n\in\NN}$ be a sequence in $X$.
@@ -63,13 +69,38 @@ Before we get into any theorems here, we need a notion of \textit{boundedness} f
 	Then $S$ is \textit{bounded} if and only if there exists an $M>0$ such that $S\subseteq [-M,M]$.
 \end{definition}
 
+We also need to invoke a famous theorem due to Bolzano and Weierstrass, which states that any bounded sequence in $\RR$ has a subsequence that is convergent in $\RR$.
+
 \begin{thm}[Bolzano-Weierstrass]
 	Let $\set{a_n}_{n\in\NN}$ be a bounded $\RR$-valued sequence.
 	Then there exists a $\set{a_{n_k}}\subseteq\set{a_n}$ such that $a_{n_k}$ converges to some $a\in\RR$.
 \end{thm}
 \begin{proof}
-
+	Let $\set{x_n}_{n\in\NN}$ be bounded.
+	Then there exists an $M\in\NN$ such that $\set{x_n}_{n\in\NN}\subset[-M,M]\subset\RR$.
+	Bisect $[-M,M]$ into $[-M,0],[0,M]$.
+	At least one half has infinitely many sequence points, call this one $I_1$.
+	Pick a sequence point $x_{n_1}\in I_1$.
+	Bisect $I_1$ and call the half with infinitely many sequence points $I_2$.
+	Pick a sequence point $x_{n_2}\in I_2$ such that the index $n_2>n_1$.
+	Iterate this process, that is bisect $I_k$ and call the half with infinitely many points $I_{k+1}$
+	Then choose a sequence point $x_{n_{k+1}}\in I_{k+1}$ with the property that the index $n_{k+1}>n_k>\ldots > n_1$.
+	Moreover, by nested interval property, $\bigcap_{k\in\NN} I_k\neq\emptyset$.
+	Thus there exists at least one $x\in \bigcap_{k\in\NN} I_k$.
+	We want to show that $x_{n_k}\rightarrow x$.
+	Let $\varepsilon> 0$ be given.
+	Choose a $K_\varepsilon\in\NN$ such that $2^{-K_\varepsilon}M< \varepsilon$.
+	Note that for all $k\geq K_\varepsilon$, $2^{-k} M <  2^{-K_\varepsilon}M< \varepsilon$.
+	Since $x\in \bigcap_{k\in\NN} I_k$, $x\in I_k$ for all $k\in\NN$.
+	Thus for all $k\in\NN$, $|x_{n_k}-x|\leq 2^{-k}M$.
+	Therefore, when we force $k\geq K_\varepsilon$ we have $I_k\subset I_{K_\varepsilon}$ and
+	\[
+	|x_{n_k}-x|\leq 2^{-k}M \leq 2^{-K_\varepsilon} M < \varepsilon.
+	\]
+	Thus, $\set{x_{n_k}}_{k\in\NN}$ is a subsequence of $\set{x_n}_{n\in\NN}$ that is convergent in $\RR$.
 \end{proof}
+
+Furthermore, we need the following lemma.
 
 \begin{lemma}
 	Any $\RR$-valued Cauchy sequence is bounded.
@@ -86,6 +117,8 @@ Before we get into any theorems here, we need a notion of \textit{boundedness} f
 	If we take $M=\max\set{M_1,M_2}$, then we have $\set{a_n}_{n\in\NN}\subset[-M,M]$.
 	Therefore, the sequence is bounded.
 \end{proof}
+
+And now we provide the proof.
 
 \begin{thm}
 	The real numbers form a complete metric space.
