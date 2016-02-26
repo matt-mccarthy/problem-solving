@@ -83,7 +83,7 @@ We also need to invoke a famous theorem due to Bolzano and Weierstrass, which st
 	Pick a sequence point $x_{n_1}\in I_1$.
 	Bisect $I_1$ and call the half with infinitely many sequence points $I_2$.
 	Pick a sequence point $x_{n_2}\in I_2$ such that the index $n_2>n_1$.
-	Iterate this process, that is bisect $I_k$ and call the half with infinitely many points $I_{k+1}$
+	Iterate this process, that is bisect $I_k$ and call the half with infinitely many points $I_{k+1}$.
 	Then choose a sequence point $x_{n_{k+1}}\in I_{k+1}$ with the property that the index $n_{k+1}>n_k>\ldots > n_1$.
 	Moreover, by nested interval property, $\bigcap_{k\in\NN} I_k\neq\emptyset$.
 	Thus there exists at least one $x\in \bigcap_{k\in\NN} I_k$.
@@ -138,6 +138,39 @@ And now we provide the proof.
 	\]
 	Thus for any $\varepsilon >0$, there exists an $N\in\NN$ such that $|a_n-a|<\varepsilon$ for all $n\geq N$.
 	Therefore $a_n$ converges to $a$ and $\RR$ is a complete metric space.
+\end{proof}
+
+\section{Bonus}
+
+\begin{thm*}
+	The set of infinite binary sequences is uncountable.
+\end{thm*}
+
+\begin{definition}[Countable Set]
+	Let $X$ be a set.
+	We say $X$ is \textit{countable} if and only if there exists a bijection between $X$ and a subset of $\NN$.
+	If $X$ has a bijection with $\NN$ itself, then we say $X$ is \textit{countably infinite}.
+\end{definition}
+
+\begin{proof}
+	Let $B$ represent the set of infinite binary sequences.
+	Proceed via contradiction.
+	Assume $B$ is countable.
+	Then $B=\set{s_i}_{i\in\NN}$ where $s_i=(b_{i,1},b_{i,2},\ldots)$ with each $b_{i,j}\in\set{0,1}$.
+	Define $\sim:\set{0,1}\rightarrow\set{0,1}$ by
+	\[
+		\sim x=
+		\begin{cases}
+			0 & x=1\\
+			1 & x=0
+		\end{cases}.
+	\]
+	We need to create a infinite binary sequence that is not equal to any $b_i$.
+	Take $s=(\sim b_{1,1},\sim b_{2,2},\ldots)$.
+	Obviously, $s\in B$.
+	However, for each $i\in\NN$, $\sim b_{i,i}\neq b_{i,i}$ and thus $s\neq s_i$ for each $i\in\NN$.
+	Therefore, $s\notin B$ which is a contradiction.
+	Ergo, $B$ must be uncountable.
 \end{proof}
 
 \end{document}
