@@ -35,6 +35,10 @@ We begin by defining the complex numbers.
 
 \begin{definition}
 	The set of \textit{complex numbers} is the set $\CC=\set{a+bi|a,b\in\RR}$ where $i^2=-1$.
+	Complex addition is defined component wise, that is $(a+bi)+(c+di)=(a+c)+(b+d)i$ and complex multiplication is defined as
+	\[
+		(a+bi)(c+di) = (ac -bd) + (ad + bc)i.
+	\]
 \end{definition}
 
 Suppose $z\in\CC$, then there exist $a,b\in\RR$ such that $z=a+bi$.
@@ -107,16 +111,106 @@ We provide a proof of that.
 		ie^{ix} =
 		\paren{\cos \theta+ i\sin \theta}\frac{dr}{dx} + r\cdot\paren{-\sin \theta+ i\cos \theta}\frac{d\theta}{dx}.
 	\]
-	Thus, when we match real and imaginary parts, we get
+	Thus, when we match real and imaginary parts, we get the following linear system of equations.
+	\begin{align*}
+		\cos \theta\frac{dr}{dx} - r\sin\theta\frac{d\theta}{dx} &= -r\sin\theta\\
+		\sin \theta\frac{dr}{dx} + r\cos\theta\frac{d\theta}{dx} &=  r\cos\theta
+	\end{align*}
+	Solving the system yields the differential equations $dr/dx = 0$ and $d\theta/dx = 1$.
+
+	Consider $e^{i0}$.
 	\[
-		\cos \theta\frac{dr}{dx} - r\sin\theta\frac{d\theta}{dx} = -r\sin\theta
+		r(0)(\cos(\theta(0))+ i\sin(\theta(0)))=e^{i0}=1=1(\cos 0 + i\sin 0)
 	\]
-	and
+	Matching terms gives us, $r(0)=1$ and $\theta(0)=0$.
+	When combined with our differential equations, this yields the following initial value problems.
 	\[
-		\sin \theta\frac{dr}{dx} + r\cos\theta\frac{d\theta}{dx} = r\cos\theta.
+		\begin{cases}
+			\frac{dr}{dx}=0\\
+			r(0)=1
+		\end{cases}
+		\hspace{4em}
+		\begin{cases}
+			\frac{d\theta}{dx}=1\\
+			\theta(0)=0
+		\end{cases}
+	\]
+	The solutions to these initial value problems are $r(x)=1$ and $\theta(x)=x$ respectively.
+	Thus,
+	\[
+		e^{ix}=\cos x + i\sin x.
+	\]
+\end{proof}
+
+We can quickly extend this result to any complex number.
+
+\begin{corollary}
+	For any $z\in\CC$, $z=re^{i\theta}$ where $\theta=\arg z$ and $r=|z|$.
+\end{corollary}
+\begin{proof}
+	Since $z\in\CC$, $z=r(\cos \theta + i\sin \theta)$ where $\theta = \arg z$ and $r=|z|$.
+	Thus by Euler's formula,
+	\[
+		z=r(\cos \theta + i\sin \theta) = re^{i\theta}.
 	\]
 \end{proof}
 
 \section{The Unit Circle}
+
+Consider $e^{i\theta}$ where $\theta$ is real.
+We know that $\abs{e^{i\theta}}=1$ by the corollary to Euler's formula.
+Thus $e^{i\theta}$ lies on the unit circle of the complex plane.
+\begin{definition}
+	The unit circle of the complex plane is the subset of $\CC$ whose elements all have a modulus of one.
+	\[
+		U = \set{z\in\CC | |z|=1}.
+	\]
+\end{definition}
+Conversely, all points on the unit circle also have the form $e^{i\theta}$ for some $\theta\in[0,2\pi)$.
+
+Our goal is to show that $U$ is a group under complex multiplication, but before we do so, let us consider $\CC$.
+Most notably, $\CC$ is a field, which implies that $\CC\setminus\set{0}$ is an abelian group under complex multiplication.
+Thus, in order to show that $(U,\cdot)$ forms a group, it is sufficient to show that $U$ is a \textit{subgroup} of $\CC\setminus\set{0}$.
+In short, a subset of a group is a subgroup if it is also a group under the group operation in its own right.
+Additionally, we have a quick test to determine whether or not a subset is a subgroup.
+
+\begin{proposition}[One step test]
+	Let $(G,*)$ be a group and $H$ a non empty subset of $G$.
+	Then $H$ is a subgroup of $G$ if for all $a,b\in H$,
+	\[
+		a*b^{-1}\in H.
+	\]
+\end{proposition}
+
+With the Euler's formula and the one step subgroup test in our toolbox, we are now ready to show that $U$ is a group.
+
+\begin{thm}
+	The set $U = \set{z\in\CC | |z|=1}$ forms a group under complex multiplication.
+\end{thm}
+\begin{proof}
+	We know that $|1|=1$, therefore $1\in U$ and $U$ is nonempty.
+	Furthermore, $U\subset\CC\setminus\set{0}$ by definition of $U$.
+
+	Proceed via one step subgroup test.
+	Let $z,w\in U$.
+	Therefore $|z|=|w|=1$ and $z=e^{i\theta}$ and $w=e^{i\phi}$ where $\theta,\phi\in\RR$ by corollary to Euler's formula.
+
+	Consider $zw^{-1}$.
+	\[
+		zw^{-1} = e^{i\theta}e^{-i\phi} = e^{i\theta - i\phi} = e^{i(\theta -\phi)}
+	\]
+	We know that for any $x\in\RR$, $|e^{ix}|=1$ therefore $|zw^{-1}|=|e^{i(\theta - \phi)}|=1$ and $zw^{-1}\in U$.
+	Thus, $U$ is a subgroup of $\CC\setminus\set{0}$ under multiplication by the one step subgroup test.
+	Therefore $(U,\cdot)$ is a group.
+\end{proof}
+
+A neat corollary to this is that the roots of unity in the complex plane are closed under multiplication.
+\begin{definition}
+	Let $n\in\NN$.
+	Then the \textit{$n$th roots of unity} are solutions to the equation
+	\[
+		z^n = 1.
+	\]
+\end{definition}
 
 \end{document}
