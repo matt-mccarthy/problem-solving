@@ -146,6 +146,33 @@ The proof of the following theorem hinges upon the previous assumption.
 	To do so, we embed $\ZZ(i)$ is $\QQ(i)$ and consider $z/w$.
 	We know $z/w=\alpha+\beta i$ with $\alpha,\beta\in\QQ$.
 	Let $\alpha',\beta'$ be the nearest integers to $\alpha$ and $\beta$ respectively.
+	Then $|\alpha-\alpha'|\leq 1/2$ and $|\beta-\beta'|\leq 1/2$.
+	Furthermore,
+	\[
+		\frac{z}{w}=\alpha-\alpha'+\alpha' + (\beta-\beta'+\beta')i=(\alpha'+\beta' i)+((\alpha-\alpha')+(\beta-\beta')i).
+	\]
+	Solving for $z$ yields,
+	\[
+		z=(\alpha'+\beta' i)w+((\alpha-\alpha')+(\beta-\beta')i)w.
+	\]
+	Since $\alpha',\beta'\in\ZZ$, we know that $\alpha'+\beta' i\in\ZZ(i)$.
+	Thus,
+	\[
+		((\alpha-\alpha')+(\beta-\beta')i)w=z-(\alpha'+\beta' i)w\in\ZZ(i)
+	\]
+	by closure.
+	Take $q=\alpha'+\beta' i$ and $r=((\alpha-\alpha')+(\beta-\beta')i)w$.
+	If $r=0$, we are done, otherwise consider $d(r)$.
+	\[
+		d(r)=|(\alpha-\alpha')+(\beta-\beta')i|^2d(w)=(|\alpha-\alpha'|^2+|\beta-\beta'|^2)d(w)
+	\]
+	However, we know that $|\alpha-\alpha'|\leq 1/2$ and $|\beta-\beta'|\leq 1/2$.
+	Therefore,
+	\[
+		d(r)\leq \paren{\frac{1}{4}+\frac{1}{4}}d(w)=\frac{1}{2}d(w) < d(w)
+	\]
+	and $d$ is a measure on $\ZZ(i)$.
+	Thus $\ZZ(i)$ is Euclidean.
 \end{proof}
 
 \end{document}
