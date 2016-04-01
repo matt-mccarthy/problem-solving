@@ -1,0 +1,151 @@
+\documentclass[notitlepage]{simple}
+
+\title{Algebraic Properties of the Gaussian Integers}
+\author{Matt McCarthy}
+\date{April 2016}
+
+\begin{document}
+
+\maketitle
+
+\begin{thm*}
+	The Gaussian Integers, denoted $\ZZ(i)$, form a Euclidean domain.
+\end{thm*}
+
+\section{Background}
+
+Before we can talk about Euclidean domains, we first need to introduce the definition of a ring.
+
+\begin{definition}[Ring]
+	Let $R$ be a nonempty set, and let $+:R^2\rightarrow R$ and $\cdot:R^2\rightarrow R$ be binary operations on $R$.
+	Then we say $R$ is a \textit{ring} if all of the following hold.
+	\begin{enumerate}
+		\item The structure $(R,+)$ is an abelian group whose identity we denote as 0.
+		\item For any $a,b,c\in R$, $a(bc)=(ab)c$ (Multiplicative Associativity).
+		\item For any $a,b,c\in R$, $a(b+c)=ab+ac$ (Left Distributivity).
+		\item For any $a,b,c\in R$, $(a+b)c=ac+bc$ (Right Distributivity).
+	\end{enumerate}
+	If one says $R$ is a ring, we imply that there exists some addition and some multiplication operators which we denote as $a+b$ and $ab$ respectively.
+\end{definition}
+
+\begin{definition}[Ring with Unity]
+	Let $R$ be a ring.
+	Then $R$ is a \textit{ring with unity} if there exists a $1\in R$ such that for any $a\in R$, $a\cdot 1 = 1\cdot a = a$.
+	If such a $1$ exists, we call it the \textit{unity}.
+\end{definition}
+
+\begin{definition}[Commutative Ring]
+	Let $R$ be a ring.
+	Then we say $R$ is \textit{commutative} if for any $a,b\in R$, $ab=ba$.
+\end{definition}
+
+The integers, denoted $\ZZ$, are a commutative ring with unity because they satisfy all of the above properties under the usual addition and multiplication.
+Another helpful definition is that of a subring.
+
+\begin{definition}[Subring]
+	Let $R$ be a ring and let $S$ be a nonempty subset of $R$.
+	Then $S$ is a \textit{subring} of $R$ if $(S,+,\cdot)$ is also a ring.
+\end{definition}
+
+Furthermore, we have a test which makes it easier to show a subset is a subring.
+
+\begin{proposition}[Subring Test]
+	Let $R$ be a ring, and let $S\subseteq R$ be nonempty.
+	Then $S$ is a subring of $R$ if and only if for any $a,b\in S$, $a-b$ and $ab$ are also in $S$.
+\end{proposition}
+
+Now we need a few more definitions and then we can proceed to proving the theorem.
+First, we need to define what a zero divisor is.
+
+\begin{definition}[Zero Divisor]
+	Let $R$ be a ring and let $a\in R$ be nonzero.
+	We say $a$ is a \textit{zero divisor} if there exists a nonzero $b\in R$ such that $ab = 0$.
+\end{definition}
+
+An example of a zero divisor is 2 in $\ZZ_6$, since $2\cdot 3\equiv 0\mod{6}$.
+An important property of zero divisors is that they cannot be inverted.
+Thus, if our ring has no zero divisors it is fairly nice; in fact it is nice enough that we name it.
+
+\begin{definition}[Integral Domain]
+	Let $R$ be a commutative ring with unity.
+	Then we say $R$ is an \textit{integral domain} if $R$ has no zero-divisors.
+\end{definition}
+
+We call these structures integral domains, because they behave like the integers.
+That is there is a unity, multiplication commutes, and we can multiply any nonzero elements together to get another nonzero element.
+
+Next we will define one of the strongest structures in algebra, the field.
+
+\begin{definition}[Field]
+	Let $\FF$ be a commutative ring with unity.
+	Then $\FF$ is a \textit{field}, if for each $a\in\FF\setminus\set{0}$, there exists a $a^{-1}\in\FF$ such that $aa^{-1}=1$.
+\end{definition}
+
+One field that we will use in our proof is the complex numbers, denoted $\CC$.
+Lastly, we define Euclidean domains.
+
+\begin{definition}[Euclidean Domain]
+	Let $R$ be an integral domain.
+	Then we say $R$ is a \textit{Euclidean domain} if there exists a function $d:R\rightarrow(\ZZ^+\cup\set{0})$ such that
+	\begin{enumerate}
+		\item for any $x,y\in R\setminus\set{0}$, $d(xy)\geq d(x)$,
+		\item and there exist $q,r\in R$ where $x=yq+r$ with $r=0$ or $d(r) < d(y)$.
+	\end{enumerate}
+	Any such $d$ is called a \textit{measure}.
+\end{definition}
+Essentially, Euclidean domains are rings where the division algorithm works.
+
+\section{Solution}
+
+To start, we define $\ZZ(i)$, the Gaussian Integers.
+
+\begin{definition}[Gaussian Integers]
+	The \textit{Gaussian Integers} are
+	\[
+		\ZZ(i)=\set{a+bi|a,b\in\ZZ}.
+	\]
+\end{definition}
+
+We first need to show that $\ZZ(i)$ is an integral domain.
+
+\begin{lemma}
+	$\ZZ(i)$ is an integral domain under standard complex addition and multiplication.
+\end{lemma}
+\begin{proof}
+	We know that $\CC$ is a field, therefore it is a commutative ring with identity and no zero divisors.
+	Thus, it suffices to show that $\ZZ(i)$ is a subring of $\CC$ that contains 1.
+	Since $1,0\in\ZZ$, $1+0i=1\in\ZZ(i)$.
+	Thus $\ZZ(i)$ is nonempty since it contains the unity.
+	We now need to show that for any $z=a+bi,w=c+di\in\ZZ(i)$, $z-w,zw\in\ZZ(i)$.
+	We know that $z-w=(a-c)+(b-d)i$ and $zw=(ac-bd)+(ad+bc)i$.
+	Since $\ZZ$ is a ring, $a-c,b-d,ac-bd$, and $ad+bc$ are in $\ZZ$ by closure.
+	Therefore, $z-w,zw\in\ZZ(i)$.
+	Thus $\ZZ(i)$ is a commutative ring with unity that has no zero divisors.
+	Hence, $\ZZ(i)$ is an integral domain.
+\end{proof}
+
+Since $\ZZ(i)$ is an integral domain, we can embed it in what we call the \textit{field of fractions}, otherwise known as $\QQ(i)$.
+We will assume that $\QQ(i)=\set{a+bi|a,b\in\QQ}$, which is true but requires a significant amount of background to show.
+The proof of the following theorem hinges upon the previous assumption.
+
+\begin{thm}
+	$\ZZ(i)$ is a Euclidean domain.
+\end{thm}
+\begin{proof}
+	In order to show that an integral domain is a Euclidean domain, we need to propose a measure.
+	We claim that $d:\ZZ(i)\rightarrow\ZZ^{+}\cup\set{0}$ given by $d(z)=|z|^2$ is such a measure.
+
+	To start we need to show that for any $z,w\in\ZZ(i)\setminus\set{0}$, $d(zw)\geq d(z)$.
+	We know that $d(zw)=|zw|^2$.
+	However, from Euler's formula, we know that $|zw|=|z||w|$.
+	Therefore, $d(zw)=|z|^2|w|^2$.
+	Furthermore, by Euler's formula, the only element with modulus less than 1 in $\ZZ(i)$ is 0.
+	Therefore, $d(zw)\geq |z|^2=d(z)$.
+
+	Next, we need to find $q,r\in\ZZ(i)$ such that $z=wq+r$ where $r=0$ or $d(r) < d(w)$.
+	To do so, we embed $\ZZ(i)$ is $\QQ(i)$ and consider $z/w$.
+	We know $z/w=\alpha+\beta i$ with $\alpha,\beta\in\QQ$.
+	Let $\alpha',\beta'$ be the nearest integers to $\alpha$ and $\beta$ respectively.
+\end{proof}
+
+\end{document}
