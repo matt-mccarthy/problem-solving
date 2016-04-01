@@ -20,11 +20,82 @@ Before we can talk about Euclidean domains, we first need to introduce the defin
 	Let $R$ be a nonempty set, and let $+:R^2\rightarrow R$ and $\cdot:R^2\rightarrow R$ be binary operations on $R$.
 	Then we say $R$ is a \textit{ring} if all of the following hold.
 	\begin{enumerate}
-		\item The structure $(R,+)$ is an abelian group.
+		\item The structure $(R,+)$ is an abelian group whose identity we denote as 0.
 		\item For any $a,b,c\in R$, $a(bc)=(ab)c$ (Multiplicative Associativity).
 		\item For any $a,b,c\in R$, $a(b+c)=ab+ac$ (Left Distributivity).
 		\item For any $a,b,c\in R$, $(a+b)c=ac+bc$ (Right Distributivity).
 	\end{enumerate}
+	If one says $R$ is a ring, we imply that there exists some addition and some multiplication operators which we denote as $a+b$ and $ab$ respectively.
 \end{definition}
+
+\begin{definition}[Ring with Unity]
+	Let $R$ be a ring.
+	Then $R$ is a \textit{ring with unity} if there exists a $1\in R$ such that for any $a\in R$, $a\cdot 1 = 1\cdot a = a$.
+	If such a $1$ exists, we call it the \textit{unity}.
+\end{definition}
+
+\begin{definition}[Commutative Ring]
+	Let $R$ be a ring.
+	Then we say $R$ is \textit{commutative} if for any $a,b\in R$, $ab=ba$.
+\end{definition}
+
+Another helpful definition is that of a subring.
+
+\begin{definition}[Subring]
+	Let $R$ be a ring and let $S$ be a nonempty subset of $R$.
+	Then $S$ is a \textit{subring} of $R$ if $(S,+,\cdot)$ is also a ring.
+\end{definition}
+
+Furthermore, we have a test which makes it easier to show a subset is a subring.
+
+\begin{proposition}[Subring Test]
+	Let $R$ be a ring, and let $S\subseteq R$ be nonempty.
+	Then $S$ is a subring of $R$ if and only if for any $a,b\in S$, $a-b$ and $ab$ are also in $S$.
+\end{proposition}
+
+Now we need a few more definitions and then we can proceed to proving the theorem.
+First, we need to define what a zero divisor is.
+
+\begin{definition}[Zero Divisor]
+	Let $R$ be a ring and let $a\in R$ be nonzero.
+	We say $a$ is a \textit{zero divisor} if there exists a nonzero $b\in R$ such that $ab = 0$.
+\end{definition}
+
+An example of a zero divisor is 2 in $\ZZ_6$, since $2\cdot 3\equiv 0\mod{6}$.
+An important property of zero divisors is that they cannot be inverted.
+Thus, if our ring has no zero divisors it is fairly nice; in fact it is nice enough that we name it.
+
+\begin{definition}[Integral Domain]
+	Let $R$ be a commutative ring with unity.
+	Then we say $R$ is an \textit{integral domain} if $R$ has no zero-divisors.
+\end{definition}
+
+We call these structures integral domains, because they behave like the integers.
+That is there is a unity, multiplication commutes, and we can multiply any nonzero elements together to get another nonzero element.
+
+Next we will define one of the strongest structures in algebra, the field.
+
+\begin{definition}[Field]
+	Let $\FF$ be a commutative ring with unity.
+	Then $\FF$ is a \textit{field}, if for each $a\in\FF\setminus\set{0}$, there exists a $a^{-1}\in\FF$ such that $aa^{-1}=1$.
+\end{definition}
+
+One field that we will use in our proof is the complex numbers, denoted $\CC$.
+Lastly, we define Euclidean domains.
+
+\begin{definition}[Euclidean Domain]
+	Let $R$ be an integral domain.
+	Then we say $R$ is a \textit{Euclidean domain} if there exists a function $d:R\rightarrow(\ZZ^+\cup\set{0})$ such that
+	\begin{enumerate}
+		\item for any $x,y\in R\setminus\set{0}$, $d(xy)\geq d(x)$,
+		\item and there exist $q,r\in R$ where $x=yq+r$ with $r=0$ or $d(r) < d(y)$.
+	\end{enumerate}
+	Any such $d$ is called a \textit{measure}.
+\end{definition}
+Essentially, Euclidean domains are rings where the division algorithm works.
+
+\section{Solution}
+
+
 
 \end{document}
