@@ -1,0 +1,130 @@
+\documentclass[notitlepage]{simple}
+
+\author{Matt McCarthy}
+\title{Box Counting Dimension of the Middle-$\lambda$ Cantor Set}
+\date{April 2016}
+
+\def\card{\operatorname{card}}
+\def\dim{\operatorname{dim}}
+\def\diam{\operatorname{diam}}
+
+\begin{document}
+	\maketitle
+
+	\begin{thm*}
+		Let $C$ denote the middle-$\lambda$ Cantor set with $0 < \lambda < 1$.
+		Then the box counting dimension of $C$ is
+		\[
+			\dim_B C = \frac{\ln 2}{\ln\paren{\frac{2}{1-\lambda}}}.
+		\]
+	\end{thm*}
+
+	\section{Background}
+
+	\subsection{Fractal Analysis}
+
+	We begin by defining a $\delta$-cover of a set.
+	\begin{definition}
+		Let $X\subset\RR^n$ and $\delta>0$.
+		Then a \textit{$\delta$-cover} of $X$ is a set $D=\set{D_i}_{i=1}^{n_D}$ such that $X\subseteq \cup_{D_i\in D} D_i$ and $\diam D_i \leq \delta$ for all $D_i\in D$.
+		We denote the collection of all such covers as $\mathcal{D}_\delta(X)$.
+	\end{definition}
+
+	Now that we have $\delta$-covers, we can define the \textit{box-counting dimension} of a set.
+
+	\begin{definition}
+		Let $X$ be a subset of $\RR^n$.
+		Then the \textit{box-counting dimension} of $X$, denoted $\dim_B(X)$, is defined as
+		\[
+			\lim\limits_{\delta\rightarrow0} \frac{\ln N_\delta(X)}{-\ln\delta}
+		\]
+		where
+		\[
+			N_\delta(X) = \min\limits_{D\in\mathcal{D}_\delta(X)} \card{D}.
+		\]
+	\end{definition}
+	Note that the box-counting dimension of a set does not necessarily exist, however when it does exist it is usually easier to find.
+
+	\begin{thm}[Squeeze Theorem]
+		Let $(a_n),(b_n),(c_n)$ be real valued sequences such that $\lim a_n = \lim c_n = x$ and $a_n\leq b_n\leq c_n$ for all $n$ greater than some $n\in\NN$.
+		Then $b_n$ converges to $x$.
+	\end{thm}
+
+	\subsection{The Cantor Set}
+
+
+
+	\section{Solution}
+
+	\begin{thm}
+		Let $C$ denote the middle-$\lambda$ Cantor set with $0 < \lambda < 1$.
+		Then the box counting dimension of $C$ is
+		\[
+			\dim_B C = \frac{\ln 2}{\ln\paren{\frac{2}{1-\lambda}}}.
+		\]
+	\end{thm}
+	\begin{proof}
+		Consider removing an interval of length $a\lambda$ from the middle of the interval $[0,a]$ for some $a>0$.
+		Since we have removed $a\lambda$ from the interval, the length of this new set is exactly $a-a\lambda=a(1-\lambda)$.
+		Moreover, since we removed it from the middle of the interval, this length is equally distributed among the two resultant subintervals.
+		Thus the subintervals must have length $a((1-\lambda)/2)$.
+		Furthermore, the leftmost interval must be $[0,a((1-\lambda)/2)]$.
+
+		We now need to find the length of any subinterval of $C_n$.
+		Since $C_0=[0,1]$, $l_0=1$.
+		This tells us that $l_1=(1-\lambda)/2$ and that the leftmost interval in $C_1$ is $[0,(1-\lambda)/2]$.
+		We know from the above logic that $l_{n+1}=l_n(1-\lambda)/2$ and its leftmost interval will be $[0,l_n(1-\lambda)/2]$.
+		Solving this recursion yields that
+		\[
+			l_n = \paren{\frac{1-\lambda}{2}}^n
+		\]
+		and the leftmost interval of $C_n$ is $[0,((1-\lambda)/2)^n]$.
+		Thus if we were to cover $C_n$ we would need $2^n$ sets of diameter $((1-\lambda)/2)^n$.
+
+		Suppose $\delta >0$.
+		Thus, we can find an $n$ such that $l_{n+1}\leq \delta < l_n$.
+		Since $\delta < l_n$, we need no fewer than $2^n$ sets of diameter $\delta$ to cover $C_n\supset C$.
+		Since $\delta \geq l_{n+1}$, we need no more than $2^{n+1}$ sets of diameter $\delta$ to cover $C_{n+1}\supset C$.
+		Thus, we can glean the following inequality.
+		\[
+			2^{n} \leq N_\delta(C) \leq 2^{n+1}.
+		\]
+		Since $\ln$ is a monotone increasing function, we get
+		\begin{equation}\label{ln-num}
+			n\ln 2 \leq \ln N_\delta(C) \leq (n+1)\ln 2.
+		\end{equation}
+		Furthermore, since $l_{n+1}\leq \delta < l_n$,
+		\begin{equation}\label{ln-den}
+			\frac{1}{-\ln l_{n+1}} \leq \frac{1}{-\ln\delta} \leq \frac{1}{-\ln l_n}.
+		\end{equation}
+
+		Take \autoref{ln-num} and multiply it by $1/(-\ln\delta)$.
+		\[
+			\frac{n\ln 2}{-\ln\delta} \leq \frac{\ln N_\delta(C)}{-\ln\delta} \leq \frac{(n+1)\ln 2}{-\ln\delta}
+		\]
+		By \autoref{ln-den}, we have
+		\[
+			\frac{n\ln 2}{-\ln l_{n+1}} \leq \frac{\ln N_\delta(C)}{-\ln\delta} \leq \frac{(n+1)\ln 2}{-\ln l_n}.
+		\]
+		Consider $\ln l_n$.
+		\[
+			\ln l_n = \ln\paren{\paren{\frac{1-\lambda}{2}}^n} = -n\ln\paren{\frac{2}{1-\lambda}}
+		\]
+		Thus, our inequality becomes,
+		\[
+			\frac{n\ln 2}{(n+1)\ln\paren{\frac{2}{1-\lambda}}} \leq \frac{\ln N_\delta(C)}{-\ln\delta} \leq \frac{(n+1)\ln 2}{n\ln\paren{\frac{2}{1-\lambda}}}.
+		\]
+		If we want to find $\lim\limits_{\delta\rightarrow 0} \ln N_\delta(C)/(-\ln\delta)$, we need to find the limits of the far left and far right as $n\rightarrow\infty$.
+		On the lefthand side we get
+		\[
+			\frac{n\ln 2}{(n+1)\ln\paren{\frac{2}{1-\lambda}}} = \frac{n\ln 2}{n\ln\paren{\frac{2}{1-\lambda}}+\ln\paren{\frac{2}{1-\lambda}}}\rightarrow\frac{\ln 2}{\ln\paren{\frac{2}{1-\lambda}}}
+		\]
+		by l'H\^opital's rule.
+		On the righthand side we get
+		\[
+			\frac{(n+1)\ln 2}{n\ln\paren{\frac{2}{1-\lambda}}} = \frac{n\ln 2+\ln 2}{n\ln\paren{\frac{2}{1-\lambda}}}\rightarrow\frac{\ln 2}{\ln\paren{\frac{2}{1-\lambda}}}
+		\]
+		again by l'H\^opital's rule.
+		Thus by squeeze theorem, $\dim_B (C)=\frac{\ln 2}{\ln\paren{\frac{2}{1-\lambda}}}$.
+	\end{proof}
+\end{document}
