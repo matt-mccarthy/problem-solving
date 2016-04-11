@@ -52,7 +52,14 @@
 
 	\subsection{The Cantor Set}
 
-
+	We will now talk about the middle third Cantor set.
+	Begin by defining $C_0=[0,1]$.
+	We now remove the middle third from $C_0$ yielding, $C_1=[0,1/3]\cup[2/3,1]$.
+	We then remove the middle third from \textit{each} subinterval of $C_1$, yielding $C_2 = [0,1/9]\cup[2/9,3/9]\cup [6/9,7/9]\cup[8/9,1]$.
+	We iterate this process by removing the middle-third from each subinterval of $C_n$ and labeling the remaining set $C_{n+1}$.
+	Finally, we define the Cantor set as $C=\cap_{n\in\NN} C_n$.
+	We can similarly construct the middle-$\lambda$ Cantor set by performing the same construction but removing $\lambda$ instead of one third in each step.
+	Furthermore, $C$ is an uncountable set that has no length left to it.
 
 	\section{Solution}
 
