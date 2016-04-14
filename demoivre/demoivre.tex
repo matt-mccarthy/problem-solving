@@ -16,6 +16,51 @@
 	Then, assuming $|r|<1$ take their limits as $n\rightarrow\infty$.
 \end{problem*}
 
+\section{Background}
 
+Before beginning, we need to mention DeMoivre's theorem.
+\begin{thm}
+	\[
+		\cos kx + i\sin kx = \paren{\cos x+i\sin x}^k
+	\]
+\end{thm}
+\begin{proof}
+	We know by Euler's formula that
+	\[
+		\paren{\cos x+i\sin x}^k = e^{ikx} = \cos kx +i\sin kx.
+	\]
+\end{proof}
+
+Another thing to know is that for $z=a+bi\in\CC$, the \textit{conjugate} of $z$, denoted $\overline{z}$, is $\overline{z}=a-bi$.
+Furthermore, $z\cdot\overline{z}=a^2+b^2$.
+
+Lastly, we need that
+\[
+	\sum_{k=0}^n z^k = \frac{1-z^{k+1}}{1-z}.
+\]
+
+\section{Solution}
+
+Consider the following.
+\begin{align*}
+	\sum_{k=0}^n r^k\cos kx + i\sum_{k=0}^n r^k\sin kx =& \sum_{k=0}^n r^k \paren{\cos kx + i\sin kx}\\
+	=& \sum_{k=0}^n r^k \paren{\cos x + i\sin x}^k\\
+	=& \frac{1-r^{n+1}\paren{\cos x + i\sin x}^{n+1}}{1-r\cos x -ir\sin x}\\
+	=& \frac{1-r^{n+1}\cos((n+1)x) -ir^{n+1}\sin((n+1)x)}{(1-r\cos x) -ir\sin x}\cdot\frac{(1-r\cos x)+ir\sin x}{(1-r\cos x) +ir\sin x}\\
+	=& \frac{1-r\cos x-r^{n+1}\cos((n+1)x)+r^{n+2}\cos x\cos((n+1)x)+r^{n+2}\sin x\sin((n+1)x)}{1-2r\cos x +r^2\cos^2 x+r^2\sin^2 x}\\
+	&+i\frac{r\sin x -r^{n+1}\sin((n+1)x)-r^{n+2}\cos((n+1)x)\sin x +r^{n+2}\cos x\sin((n+1)x)}{1-2r\cos x +r^2\cos^2 x+r^2\sin^2 x}
+\end{align*}
+
+By matching real parts and imaginary parts we get
+\begin{align*}
+	\sum_{k=0}^n r^k\cos kx &= \frac{1-r\cos x-r^{n+1}\cos((n+1)x)+r^{n+2}\cos x\cos((n+1)x)+r^{n+2}\sin x\sin((n+1)x)}{1-2r\cos x +r^2}\\
+	\sum_{k=0}^n r^k\sin kx &= \frac{r\sin x -r^{n+1}\sin((n+1)x)-r^{n+2}\cos((n+1)x)\sin x +r^{n+2}\cos x\sin((n+1)x)}{1-2r\cos x +r^2}.
+\end{align*}
+
+If we suppose $|r|<1$ and let $n\rightarrow\infty$ we get that
+\begin{align*}
+	\sum_{k=0}^\infty r^k\cos kx &= \frac{1-r\cos x}{1-2r\cos x +r^2}\\
+	\sum_{k=0}^\infty r^k\sin kx &= \frac{r\sin x}{1-2r\cos x +r^2}.
+\end{align*}
 
 \end{document}
