@@ -1,0 +1,111 @@
+\documentclass[notitlepage]{problem-solving}
+
+\author{Matt McCarthy}
+\date{June 2016}
+\title{Roots of Unity}
+
+\begin{document}
+
+\maketitle
+
+\begin{problem*}
+	Find the roots of the equation
+	\[
+		z^5-1=0.
+	\]
+\end{problem*}
+
+\section{Background}
+
+The complex numbers, denoted as $\CC$ are defined as follows.
+\begin{definition}
+	The set of \textit{complex numbers} is the following two-dimensional vector space over the real numbers.
+	\[
+		\CC := \set{a+bi\, :\, a,b\in\RR}
+	\]
+\end{definition}
+Furthermore, all $z\in\CC$ have the form
+\[
+	r(\cos\theta+i\sin\theta)
+\]
+where $r\in\RR$ with $r\geq 0$ and $\theta\in\RR$.
+Additionally, we have Euler's formula which will allow us to write the polar form of a complex number more concisely.
+\begin{thm}
+	For all $\theta\in\RR$,
+	\[
+		e^{i\theta} = \cos\theta+i\sin\theta.
+	\]
+\end{thm}
+Thus, any complex number, $z$, can be written as
+\[
+	z=re^{i\theta}.
+\]
+Moreover, for any $z=a+bi=re^{i\theta}\in\CC$, the \textit{conjugate} of $z$, denoted $\bar{z}$, is defined as
+\[
+	\bar{z}:=a-bi=re^{-i\theta}
+\]
+and the \textit{modulus} of a $z$ is defined as
+\[
+	|z| := \sqrt{a^2+b^2} = r.
+\]
+Thus,
+\[
+	|e^{i\theta}| = 1.
+\]
+Lastly, an \textit{$n$th root of unity} is a solution to the equation
+\[
+	z^n = 1.
+\]
+
+\section{Solution}
+
+\begin{problem*}
+	Find the roots of the equation
+	\[
+		z^5-1=0.
+	\]
+\end{problem*}
+
+We want to find the roots of the equation,
+\[
+	z^5 - 1= 0.
+\]
+Equivalently, we will find the 5th roots of unity, or the solutions to
+\[
+	z^5 = 1.
+\]
+To begin, we know that $z=re^{i\theta}$ for some $r\geq 0$ and $\theta\in\RR$.
+Furthermore, we know that $1=e^{2ki\pi}$ for all $k\in\ZZ$.
+Thus,
+\[
+	r^5e^{5i\theta} = e^{2ki\pi}
+\]
+for all $k\in\ZZ$.
+Since $|e^{i\phi}| = 1$ for all $\phi\in\RR$, we know that $r^5 = 1$.
+Thus, $r=1$ because $r$ is a positive real.
+Thus, we are left with
+\[
+	e^{5i\theta}=e^{2ki\pi}.
+\]
+Ergo,
+\[
+	\theta = 2ki\pi/5
+\]
+for all $k\in\ZZ$.
+However, this is an infinite solution set and there are only 5 \textit{distinct} solutions.
+To find these distinct solutions, we use the fact that
+\[
+	e^{i\theta} = e^{i(\theta+2k\pi)}
+\]
+for any $k\in\ZZ$.
+Thus, our distinct values for $\theta$ are as follows.
+\[
+	\theta\in\set{0, 2\pi/5, 4\pi/5, 6\pi/5, 8\pi/5}
+\]
+When $\theta =10\pi/5 = 2\pi$, we get the same result as when $\theta=0$ since $2\pi\equiv 0\mod{2\pi}$.
+Therefore,
+\[
+	z\in\set{1,e^{2\pi/5}, e^{4\pi/5}, e^{6\pi/5}, e^{8\pi/5}}.
+\]
+
+\end{document}
