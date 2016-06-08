@@ -4,14 +4,22 @@
 \date{June 2016}
 \title{Roots of Unity}
 
+\usepackage{pgf,tikz}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+
+\definecolor{qqwuqq}{rgb}{0.,0.39215686274509803,0.}
+\definecolor{xdxdff}{rgb}{0.49019607843137253,0.49019607843137253,1.}
+\definecolor{qqqqff}{rgb}{0.,0.,1.}
+
 \begin{document}
 
 \maketitle
 
 \begin{problem*}
-	Find the roots of the equation
+	Factor the polynomial
 	\[
-		z^5-1=0.
+		p=z^5-1.
 	\]
 \end{problem*}
 
@@ -21,38 +29,65 @@ The complex numbers, denoted as $\CC$ are defined as follows.
 \begin{definition}
 	The set of \textit{complex numbers} is the following two-dimensional vector space over the real numbers.
 	\[
-		\CC := \set{a+bi\, :\, a,b\in\RR}
+		\CC := \set{a+bi\, :\, a,b\in\RR,\, i^2 = -1}
 	\]
 \end{definition}
-Furthermore, all $z\in\CC$ have the form
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1.5cm,y=1.5cm]
+	\draw[->,color=black] (-0.5,0.) -- (2.5,0.);
+	\foreach \x in {,1.,2.}
+	\draw[shift={(\x,0)},color=black] (0pt,2pt) -- (0pt,-2pt);
+	\draw[color=black] (2.6,-0.15) node [anchor=south west] {$x$};
+	\draw[->,color=black] (0.,-0.5) -- (0.,2.5);
+	\foreach \y in {,1.,2.}
+	\draw[shift={(0,\y)},color=black] (2pt,0pt) -- (-2pt,0pt);
+	\draw[color=black] (-0.2,2.8) node [anchor=west] {$iy$};
+	\clip(-0.5,-0.5) rectangle (2.5,2.5);
+	\draw[color=qqwuqq,fill=qqwuqq,fill opacity=0.1] (2.,0.22277768022923544) -- (1.7772223197707646,0.22277768022923547) -- (1.7772223197707646,0.) -- (2.,0.) -- cycle;
+	\draw [shift={(0.,0.)},color=qqwuqq,fill=qqwuqq,fill opacity=0.1] (0,0) -- (0.:0.3150552167742013) arc (0.:45.:0.3150552167742013) -- cycle;
+	\draw (0.,0.)-- (2.,2.);
+	\draw (2.,2.)-- (2.,0.);
+	\draw (0.,0.)-- (2.,0.);
+	\begin{scriptsize}
+	\draw [fill=qqqqff] (2.,2.) circle (2.5pt);
+	\draw[color=qqqqff] (2.0719752655925316,2.191528364493368) node {$z$};
+	\draw [fill=qqqqff] (0.,0.) circle (2.5pt);
+	\draw[color=qqqqff] (-0.15,-0.15) node {$0$};
+	\draw[color=black] (0.8012525579365867,1.109838786901943) node {$r$};
+	\draw [fill=xdxdff] (2.,0.) circle (2.5pt);
+	\draw[color=xdxdff] (2.2,0.185676817697619) node {$a$};
+	\draw[color=black] (2.1664918306247922,0.9838167001922624) node {$b$};
+	\draw [fill=xdxdff] (0.,2.) circle (2.5pt);
+	\draw[color=xdxdff] (-0.22792781685913763,2.023498915547127) node {$b$};
+	\draw[color=black] (1.0322930502376675,-0.19238944243142264) node {$a$};
+	\draw[color=qqwuqq] (0.4,0.15) node {$\theta$};
+	\end{scriptsize}
+	\end{tikzpicture}
+	\caption{A diagram of the complex plane.\label{c}}
+\end{figure}
+\noindent Furthermore, all $z\in\CC$ have a \textit{polar form}
 \[
-	r(\cos\theta+i\sin\theta)
+	z=r(\cos\theta+i\sin\theta)
 \]
-where $r\in\RR$ with $r\geq 0$ and $\theta\in\RR$.
-Additionally, we have Euler's formula which will allow us to write the polar form of a complex number more concisely.
+where $r,\theta\in\RR$ with $r\geq 0$.
+Moreover, $\theta$ is called the \textit{argument} of $z$.
+Additionally, we have Euler's formula which allows us to write the polar form of a complex number more concisely.
 \begin{thm}
 	For all $\theta\in\RR$,
 	\[
 		e^{i\theta} = \cos\theta+i\sin\theta.
 	\]
 \end{thm}
-Thus, any complex number, $z$, can be written as
+\noindent Thus, any $z\in\CC$ can be written as
 \[
 	z=re^{i\theta}.
 \]
-Moreover, for any $z=a+bi=re^{i\theta}\in\CC$, the \textit{conjugate} of $z$, denoted $\bar{z}$, is defined as
-\[
-	\bar{z}:=a-bi=re^{-i\theta}
-\]
-and the \textit{modulus} of a $z$ is defined as
+Moreover, for any $z=a+bi=re^{i\theta}\in\CC$, the \textit{modulus} of a $z$ is defined as
 \[
 	|z| := \sqrt{a^2+b^2} = r.
 \]
-Thus,
-\[
-	|e^{i\theta}| = 1.
-\]
-Lastly, an \textit{$n$th root of unity} is a solution to the equation
+Lastly, an \textit{$n$th root of unity} is a $z\in\CC$ such that
 \[
 	z^n = 1.
 \]
@@ -60,13 +95,13 @@ Lastly, an \textit{$n$th root of unity} is a solution to the equation
 \section{Solution}
 
 \begin{problem*}
-	Find the roots of the equation
+	Factor the polynomial
 	\[
-		z^5-1=0.
+		p=z^5-1.
 	\]
 \end{problem*}
 
-We want to find the roots of the equation,
+\noindent In order to factor $p$, we want to find the roots of the equation
 \[
 	z^5 - 1= 0.
 \]
@@ -105,7 +140,12 @@ Thus, our distinct values for $\theta$ are as follows.
 When $\theta =10\pi/5 = 2\pi$, we get the same result as when $\theta=0$ since $2\pi\equiv 0\mod{2\pi}$.
 Therefore,
 \[
-	z\in\set{1,e^{2\pi/5}, e^{4\pi/5}, e^{6\pi/5}, e^{8\pi/5}}.
+	z\in S:=\set{1,e^{2\pi/5}, e^{4\pi/5}, e^{6\pi/5}, e^{8\pi/5}}.
+\]
+Since each of the elements of the solution set is a root of the polynomial, $z^5-1$, we can factor out $z-r$ from $p$ for each $r\in S$.
+Thus,
+\[
+	p = z^5-1=(z-1)(z-e^{2\pi/5})(z-e^{4\pi/5})(z-e^{6\pi/5})(z-e^{8\pi/5}).
 \]
 
 \end{document}
