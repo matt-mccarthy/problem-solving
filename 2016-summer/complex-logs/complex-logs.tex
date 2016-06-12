@@ -8,6 +8,99 @@
 
 \maketitle
 
+\begin{problem*}
+	Find what step is wrong in the following statements.
+	\begin{align*}
+		1 &= 1^\pi\\
+		&= \paren{e^{2i\pi}}^\pi\\
+		&=e^{2i\pi^2}\\
+		&=\cos 2\pi^2 + i\sin 2\pi^2\\
+		&\approx 0.6296 +0.7768 i
+	\end{align*}
+\end{problem*}
 
+\section{Background}
+
+\subsection{Complex Logarithms}
+
+In $\RR$ we can define logarithms in various ways such as the inverse of the exponential and as
+\[
+	\ln x = \int \frac{1}{x} dx.
+\]
+However, in $\CC$ the original definition (inverse of the exponential) fails since
+\[
+	e^{i\theta} = e^{i\theta + 2ki\pi}
+\]
+where $k\in\ZZ$.
+Essentially, the exponential is a bijection between $\RR$ and $(0,\infty)$ and is thus invertible.
+When we move to $\CC$, the exponential function loses its injectivity since multiple domain elements get mapped to a single element in the range.
+However, the defining logarithms as the antiderivative of $1/x$ still works.
+\begin{definition}
+	Let $z\in\CC$.
+	Then $\log z$ is defined as
+	\[
+		\log z := \ln |z| +i\arg z.
+	\]
+	If $\arg z\in[0,2\pi)$ we say it is the \textit{principal logarithm} of $z$.
+\end{definition}
+As we can see by the definition, the complex logarithm is \textit{multivalued}, thus if we want it to be well-defined we need to restrict the argument of the input to a half-open interval of length $2\pi$.
+
+\subsection{Exponentiation with a Complex Base}
+
+Because of these problems with the logarithm, exponentiation becomes less straightforward.
+In the complex world, exponentiation is defined as follows.
+\begin{definition}
+	Let $z,w\in\CC$.
+	Then
+	\[
+		w^z = e^{z\log w}.
+	\]
+\end{definition}
+However, this definition is equivalent to
+\[
+	w^z = e^{z(\ln|w| + i\arg w)}.
+\]
+Thus, exponentiation in the complex plane is now also multivalued, because of the properties of the complex logarithm.
+As we will see later, this will cause us to lose some properties generally associated with exponentiation.
+
+When exponentiating, the following are true.
+\begin{enumerate}
+	\item $z^w$ is single-valued iff $w\in\ZZ$.
+	\item $z^{m/n}$ has $n$ distinct values for $m,n\in\QQ$.
+	\item $z^x$ has infinitely many values if $x$ is irrational.
+\end{enumerate}
+
+\section{Solution}
+
+\begin{problem*}
+	Find what step is wrong in the following statements.
+	\begin{align*}
+		1 &= 1^\pi\\
+		&= \paren{e^{2i\pi}}^\pi\\
+		&=e^{2i\pi^2}\\
+		&=\cos 2\pi^2 + i\sin 2\pi^2\\
+		&\approx 0.6296 +0.7768 i
+	\end{align*}
+\end{problem*}
+
+The problem is
+\[
+	1^\pi = 1.
+\]
+By definition of complex exponentiation we have
+\[
+	1^\pi = e^{\pi\log 1}.
+\]
+However
+\[
+	\log 1 = \ln |1| + i\arg 1 = 0 + 2ki\pi
+\]
+for $k\in\ZZ$.
+Thus,
+\[
+	1^{\pi} = e^{2ki\pi^2}.
+\]
+Since $\pi$ is irrational, there are infinitely many values that $e^{2ki\pi^2}$ can take only one of which will yield 1 as the answer.
+If we force $k=0$, then we get the desired result that $1^\pi = 1$, however this excludes infinitely many other values.
 
 \end{document}
