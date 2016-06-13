@@ -27,7 +27,7 @@
 
 \subsection{Complex Logarithms}
 
-In $\RR$ we can define logarithms in various ways such as the inverse of the exponential and as
+In $\RR$ we can define logarithms in various ways such as the inverse of the exponential or as
 \[
 	\ln x = \int \frac{1}{x} dx.
 \]
@@ -45,8 +45,13 @@ However, defining logarithms as the antiderivative of $1/x$ still works.
 	\[
 		\log z := \ln |z| +i\arg z.
 	\]
-	If $\arg z\in[0,2\pi)$ we say it is the \textit{principal logarithm} of $z$.
+	If $\arg z\in(-\pi,\pi]$ we say it is the \textit{principal logarithm} of $z$.
 \end{definition}
+\begin{corollary}
+	\[
+		\frac{d}{dz} \log z = \frac{1}{z}
+	\]
+\end{corollary}
 As we can see by the definition, the complex logarithm is \textit{multivalued}, thus if we want it to be well-defined we need to restrict the argument of the input to an open interval of length $2\pi$.
 
 \subsection{Exponentiation with a Complex Base}
