@@ -56,6 +56,8 @@
 \def\RR{\mathbb{R}}	% Reals
 \def\ZZ{\mathbb{Z}}	% Integers
 
+\setlength\parindent{0pt}
+
 \newenvironment{analysis}{\noindent\textit{Analysis.}}{\\[1em]}
 
 \renewcommand\Re{\operatorname{Re}}	% Real part of complex number
