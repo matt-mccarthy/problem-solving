@@ -1,8 +1,12 @@
 \documentclass[notitlepage]{problem-solving}
 
-\title{The Mystery of $1^\pi$}
+\title{The Mystery of $1^\pi$\\ Wrestling with Complex Exponentiation}
 \author{Matt McCarthy}
 \date{June 2016}
+
+\addbibresource{complex-logs.bib}
+
+\nocite{*}
 
 \begin{document}
 
@@ -34,7 +38,7 @@ However, in $\CC$ the original definition (inverse of the exponential) fails sin
 where $k\in\ZZ$.
 Essentially, the exponential is a bijection between $\RR$ and $(0,\infty)$ and is thus invertible.
 When we move to $\CC$, the exponential function loses its injectivity since multiple domain elements get mapped to a single element in the range.
-However, the defining logarithms as the antiderivative of $1/x$ still works.
+However, defining logarithms as the antiderivative of $1/x$ still works.
 \begin{definition}
 	Let $z\in\CC$.
 	Then $\log z$ is defined as
@@ -43,14 +47,14 @@ However, the defining logarithms as the antiderivative of $1/x$ still works.
 	\]
 	If $\arg z\in[0,2\pi)$ we say it is the \textit{principal logarithm} of $z$.
 \end{definition}
-As we can see by the definition, the complex logarithm is \textit{multivalued}, thus if we want it to be well-defined we need to restrict the argument of the input to a half-open interval of length $2\pi$.
+As we can see by the definition, the complex logarithm is \textit{multivalued}, thus if we want it to be well-defined we need to restrict the argument of the input to an open interval of length $2\pi$.
 
 \subsection{Exponentiation with a Complex Base}
 
 Because of these problems with the logarithm, exponentiation becomes less straightforward.
 In the complex world, exponentiation is defined as follows.
 \begin{definition}
-	Let $z,w\in\CC$.
+	Let $z,w\in\CC$ with $w\neq 0$.
 	Then
 	\[
 		w^z = e^{z\log w}.
@@ -60,13 +64,12 @@ However, this definition is equivalent to
 \[
 	w^z = e^{z(\ln|w| + i\arg w)}.
 \]
-Thus, exponentiation in the complex plane is now also multivalued, because of the properties of the complex logarithm.
-As we will see later, this will cause us to lose some properties generally associated with exponentiation.
+Thus, due to the properties of the complex logarithm, exponentiation in the complex plane is also multivalued.
 
 When exponentiating, the following are true.
 \begin{enumerate}
 	\item $z^w$ is single-valued iff $w\in\ZZ$.
-	\item $z^{m/n}$ has $n$ distinct values for $m,n\in\QQ$.
+	\item $z^{m/n}$ has $n$ distinct values for $m,n\in\ZZ$ with $n>0$ and $\gcd(m,n)=1$.
 	\item $z^x$ has infinitely many values if $x$ is irrational.
 \end{enumerate}
 
@@ -102,5 +105,7 @@ Thus,
 \]
 Since $\pi$ is irrational, there are infinitely many values that $e^{2ki\pi^2}$ can take only one of which will yield 1 as the answer.
 If we force $k=0$, then we get the desired result that $1^\pi = 1$, however this excludes infinitely many other values.
+
+\printbibliography
 
 \end{document}
