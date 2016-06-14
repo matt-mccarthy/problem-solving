@@ -1,0 +1,199 @@
+\documentclass[notitlepage]{problem-solving}
+
+\author{Matt McCarthy}
+\date{June 2016}
+\title{Eigenvalues and Eigenvectors}
+
+\begin{document}
+
+\maketitle
+
+\begin{problem*}
+	Let $\tau:\FF_5^3\rightarrow\FF_5^3$ be the endomorphism defined by
+	\[
+		\tau =
+		\begin{pmatrix}
+			1 & 0 & 2\\
+			2 & 0 & 1\\
+			1 & 2 & 1
+		\end{pmatrix}.
+	\]
+	Find all eigenvalues and eigenvectors of $\tau$.
+
+	(Note: $\FF_5$ denotes $\ZZ/5\ZZ$, the integers modulo 5.)
+\end{problem*}
+
+\section{Background}
+
+Lets begin with the definition of eigenvalues and eigenvectors.
+\begin{definition}
+	Let $V$ be a vector space over a field $\FF$ and let $\tau$ be an endomorphism on $V$.
+	A scalar $\lambda\in\FF$ is an \textit{eigenvalue} of $\tau$ if there exists a nonzero vector $v$ such that
+	\[
+		\tau v =\lambda v.
+	\]
+	If such a $v$ exists, it is called an \textit{eigenvector} of $\tau$ associated with $\lambda$.
+\end{definition}
+
+Furthermore, in finite-dimensional vector spaces, each endomorphism has a minimal polynomial.
+\begin{definition}
+	Let $V$ be a finite-dimensional vector space over a field $\FF$ and let $\tau$ be an endomorphism on $V$.
+	Then the \textit{minimal polynomial} of $\tau$ is the generator of the ideal
+	\[
+		I_\tau = \set{p\in\FF[x] | p(\tau) = 0}.
+	\]
+\end{definition}
+
+Moreover, the eigenvalues of an endomorphism are the zeros of this minimal polynomial.
+\begin{thm}
+	Let $\tau$ be an endomorphism with minimal polynomial $p$.
+	Then the set of zeros of $p$ and the set of eigenvalues of $\tau$ are equal.
+\end{thm}
+
+\section{Solution}
+
+\begin{problem*}
+	Let $\tau:\FF_5^3\rightarrow\FF_5^3$ be the endomorphism defined by
+	\[
+		\tau =
+		\begin{pmatrix}
+			1 & 0 & 2\\
+			2 & 0 & 1\\
+			1 & 2 & 1
+		\end{pmatrix}.
+	\]
+	Find all eigenvalues and eigenvectors of $\tau$.
+
+	(Note: $\FF_5$ denotes $\ZZ/5\ZZ$, the integers modulo 5.)
+\end{problem*}
+
+We begin by finding the minimal polynomial of $\tau$.
+To do so, we apply $\tau$ multiple times to the vector $e_1 = (1,0,0)$.
+\[
+	\tau^0 e_1 =
+	\begin{pmatrix}
+		1\\
+		0\\
+		0
+	\end{pmatrix}
+	\hspace{1cm}
+	\tau^1 e_1 =
+	\begin{pmatrix}
+		1 & 0 & 2\\
+		2 & 0 & 1\\
+		1 & 2 & 1
+	\end{pmatrix}
+	\begin{pmatrix}
+		1\\
+		0\\
+		0
+	\end{pmatrix}
+	=
+	\begin{pmatrix}
+		1\\
+		2\\
+		1
+	\end{pmatrix}
+	\hspace{1cm}
+	\tau^2 e_1 =
+	\begin{pmatrix}
+		1 & 0 & 2\\
+		2 & 0 & 1\\
+		1 & 2 & 1
+	\end{pmatrix}
+	\begin{pmatrix}
+		1\\
+		2\\
+		1
+	\end{pmatrix}
+	=
+	\begin{pmatrix}
+		3\\
+		3\\
+		1
+	\end{pmatrix}
+\]
+We now need to check that $B=\set{e_1, \tau e_1, \tau^2 e_1}$ is linearly independent.
+Therefore, we must solve the equation
+\[
+	a(1,0,0)+b(1,2,1)+c(3,3,1)=0.
+\]
+Indeed, this equation implies that $a=b=c=0$.
+Ergo $B$ is linearly independent.
+Next, we compute one more power of $\tau$.
+\[
+\tau^3 e_1 =
+\begin{pmatrix}
+	1 & 0 & 2\\
+	2 & 0 & 1\\
+	1 & 2 & 1
+\end{pmatrix}
+\begin{pmatrix}
+	3\\
+	3\\
+	1
+\end{pmatrix}
+=
+\begin{pmatrix}
+	0\\
+	2\\
+	0
+\end{pmatrix}
+\]
+Consider the equation
+\[
+	a(1,0,0)+b(1,2,1)+c(3,3,1)=(0,2,0).
+\]
+This implies that $a=1$, $b=3$, and $c=2$.
+Thus,
+\[
+	\tau^3e_1=e_1 + 3\tau e_1 + 2 \tau^2 e_1
+\]
+which yields a minimal polynomial of
+\[
+	\mu_{\tau, e_1} = X^3 +3X^2 + 2X +4.
+\]
+Recall that the set of eigenvalues of a linear transform is the set of zeros of its minimal polynomial.
+We notice that $\mu_{\tau,e_1}(1)=0$, thus $X-1|\mu_{\tau,e_1}$.
+Therefore,
+\[
+	\mu_{\tau,e_1} = (X-1)(X^2+4X+1).
+\]
+When we apply the quadratic formula, we get that
+\[
+	X= 3 + 3\sqrt{2}, 3+2\sqrt{2}
+\]
+are also zeros of $\mu_{\tau,e_1}$.
+Therefore the eigenvalues of $\mu_{\tau,e_1}$ are $1, 3+3\sqrt{2}, 3+2\sqrt{2}$.
+To find the eigenvectors that correspond to 1, we solve the following equation.
+\[
+\begin{pmatrix}
+	1 & 0 & 2\\
+	2 & 0 & 1\\
+	1 & 2 & 1
+\end{pmatrix}
+\begin{pmatrix}
+	a\\
+	b\\
+	c
+\end{pmatrix}
+=
+1\cdot
+\begin{pmatrix}
+	a\\
+	b\\
+	c
+\end{pmatrix}
+\]
+This corresponds to the following system of equations.
+\begin{align*}
+	a + 0b + 2c &= a\\
+	2a + 0b + c &= b\\
+	a + 2b + c &= c
+\end{align*}
+This system implies that $c = 0$ and $b = 2a$, thus any vector in $\FF_5^3$ of the form $(a,2a,0)$ is an eigenvector of 1.
+
+Even though $\sqrt{2}\notin\FF_5$, we can embed $\FF_5$ inside $\FF_5[\sqrt{2}]$.
+By performing a similar process we get that any vector of the form $(a,3\sqrt{2} a, (1+4\sqrt{2})a)$ is an eigenvector of $3+3\sqrt{2}$ and $(a,2\sqrt{2} a, (1+\sqrt{2})a)$ is an eigenvector of $3+2\sqrt{2}$ where $a\in\FF_{5}[\sqrt{2}]$.
+
+\end{document}
