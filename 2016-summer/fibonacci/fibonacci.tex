@@ -13,7 +13,7 @@
 
 \begin{problem*}
 	Let $(F_n)_{n\in\NN}$ denote the sequence of Fibonacci numbers.
-	Find the closed form of the generating function for $F_n$ and use it to create a closed form for $F_n$.
+	Find the closed form of $F_n$.
 \end{problem*}
 
 \section{Background}
@@ -23,12 +23,12 @@ Lets begin with the definition of the Fibonacci numbers.
 	The Fibonacci numbers $(F_n)_{n\in\NN}$ are defined by $F_1=F_2=1$, and $F_{n+2}=F_{n+1}+F_n$.
 \end{definition}
 
-From the Fibonacci numbers we get the golden ratio, $\varphi$, and its conjugate, $\overline{\varphi}$.
+From the Fibonacci numbers we get the golden ratio, $\varphi$, and its conjugate, $\overline{\varphi}$ where
 \[
-	\varphi = \frac{1+\sqrt{5}}{2} \hspace{1cm} \overline{\varphi} = \frac{1-\sqrt{5}}{2}
+	\varphi = \frac{1+\sqrt{5}}{2} \text{ and } \overline{\varphi} = \frac{1-\sqrt{5}}{2}.
 \]
 
-While the Fibonacci recurrence is simple, its difficult to tell what the $n$th term is without computing all of the terms before it.
+While the Fibonacci recurrence is simple, its difficult to tell from the definition what the $n$th Fibonacci number is without computing all of the terms before it.
 Since the Fibonacci's are defined recursively, we can use \textit{generating functions} to extract a closed form for $F_n$ relatively easily.
 
 \begin{definition}
@@ -40,25 +40,25 @@ Since the Fibonacci's are defined recursively, we can use \textit{generating fun
 \end{definition}
 
 After we create the generating function, we generally want to find its closed form (that is, a representation without using limits).
-Then, we use that new representation to find a closed form for the terms of the sequence.
+Then, we use that new representation to find a closed form for the terms of the sequence (in this case, a non-recursive representation).
 
 \section{Solution}
 
 \begin{problem*}
 	Let $(F_n)_{n\in\NN}$ denote the sequence of Fibonacci numbers.
-	Find the closed form of the generating function for $F_n$ and use it to create a closed form for $F_n$.
+	Find the closed form of $F_n$.
 \end{problem*}
 
 We begin by setting up a generating function, $F(x)$, for $F_n$.
 \[
-	F(x) = \sum_{n=1}^\infty F_n x^n.
+	F(x) := \sum_{n=1}^\infty F_n x^n.
 \]
-The next step is to invoke the recurrence, however $F_1$ and $F_2$ need to be handled separately since they are not defined recursively.
+The next step is to use the recurrence, however $F_1$ and $F_2$ need to be handled separately since they are not defined recursively.
 Thus,
 \[
 	F(x) = F_1 x + F_2 x^2 + \sum_{n=3}^\infty F_n x^n.
 \]
-Now we invoke the definition of the Fibonacci numbers yielding,
+Now we apply the definition of the Fibonacci numbers yielding,
 \[
 	F(x) = x + x^2 + \sum_{n=3}^\infty (F_{n-1} + F_{n-2}) x^n.
 \]
@@ -66,29 +66,37 @@ By rearranging we get,
 \[
 	F(x) = x + x^2 +\paren{\sum_{n=3}^\infty F_{n-1} x^n} + \paren{\sum_{n=3}^\infty F_{n-2} x^n}.
 \]
-We then factor out as many powers of $x$ from the sums and reindex to get
+Now, we factor out some power of $x$ from each sum, yielding
 \[
-	F(x) = x + x^2 +x\paren{F_1x-F_1x+\sum_{n=2}^\infty F_{n} x^n} + x^2\paren{\sum_{n=1}^\infty F_{n} x^n}.
+	F(x) = x + x^2 +x\paren{\sum_{n=3}^\infty F_{n-1} x^{n-1}} + x^2\paren{\sum_{n=3}^\infty F_{n-2} x^{n-2}}.
 \]
-A little algebraic manipulation yields,
+We now reindex the sums and do some manipulation so that we get the following.
 \[
-	F(x) = x+x^2 -x^2 +x\paren{\sum_{n=1}^\infty F_n x^n} + x^2 \paren{\sum_{n=1}^\infty F_n x^n}.
+	F(x) = x + x^2 +x\paren{F_1x-F_1x+\sum_{n=2}^\infty F_{n} x^n} + x^2\paren{\sum_{n=1}^\infty F_{n} x^n}
+\]
+Some more manipulation yields,
+\[
+	F(x) = x + x^2 -x^2 +x\paren{\sum_{n=1}^\infty F_n x^n} + x^2 \paren{\sum_{n=1}^\infty F_n x^n}.
 \]
 Note, that we see the original definition of $F(x)$ in this new form, therefore
 \[
 	F(x) = x + xF(x) + x^2 F(x).
 \]
-We now solve for $F(x)$, yielding a closed form of
+Solving for $F(x)$ yields,
 \[
-	F(x) = \frac{x}{1-x-x^2}.
+	F(x) = \frac{x}{1-x-x^2} = \frac{x}{-(x^2+x-1)}.
 \]
 
 The next step is to find the closed form of $F_n$.
-We know that $\varphi$ and $\overline{\varphi}$ are roots of  the polynomial in the denominator, therefore
+We know that $-\varphi$ and $-\overline{\varphi}$ are roots of  the polynomial in the denominator, therefore
+\[
+	F(x) = \frac{x}{-(x+\varphi)(x+\overline{\varphi})}.
+\]
+Using $\varphi\overline{\varphi} = -1$ yields,
 \[
 	F(x)=\frac{x}{(1-\varphi x)(1-\overline{\varphi}x)}.
 \]
-To do so, we perform partial fraction decomposition of $F(x)$ yielding,
+Next, we perform partial fraction decomposition of $F(x)$, which gives us
 \[
 	F(x) = \frac{1}{\sqrt{5}} \paren{\frac{1}{1-\varphi x}-\frac{1}{1-\overline{\varphi}x}}.
 \]
