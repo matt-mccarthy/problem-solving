@@ -1,0 +1,106 @@
+\documentclass[notitlepage]{problem-solving}
+
+\author{Matt McCarthy}
+\title{Trigonometric Sum and Difference Formulas in $\CC$}
+\date{June 2016}
+
+\addbibresource{complex-trig-sum.bib}
+\nocite{*}
+
+\begin{document}
+
+\maketitle
+
+\section{Background}
+
+\begin{definition}
+	Let $f:\CC\rightarrow\CC$, where $f(x+iy)=u(x,y)+iv(x,y)$, be a function such that $\partial u/\partial x$, $\partial u/\partial y$, $\partial v/\partial x$, and $\partial v/\partial y$ exist and are continuous on some disk $D\subseteq\CC$ with a nonzero radius.
+	If $f$ satisfies the \textit{Cauchy-Riemann equations}
+	\[
+		\frac{\partial u}{\partial x} = \frac{\partial v}{\partial y} \text{ and } \frac{\partial u}{\partial y} = -\frac{\partial v}{\partial x}
+	\]
+	then $f$ is said to be \textit{analytic on $D$}.
+	Furthermore, the largest subset of $\CC$ on which $f$ is analytic is called $f$'s \textit{domain of analyticity}.
+	If the domain of analyticity is $\CC$, then $f$ is said to be \textit{entire}.
+\end{definition}
+
+\begin{thm}
+	Let $f$ be analytic on a disk $D$, then the Taylor series for $f$ converges for all $z\in D$.
+\end{thm}
+
+\section{Solution}
+
+\subsection{Analyticity of $e^{z}$}
+
+\begin{proposition}
+	$e^z$ is entire.
+\end{proposition}
+\begin{proof}
+	Let $z=x+iy$.
+	We want to find $\RR$-valued functions $u,v$ such that $e^{x+iy}=u(x,y)+iv(x,y)$.
+	\begin{align*}
+		e^z &= e^{x+iy}\\
+		&= e^x e^{iy}\\
+		&= e^x \cos y + ie^x\sin y\\
+		&= u(x,y) +iv(x,y)
+	\end{align*}
+	Taking partial derivatives yields the following.
+	\[
+		\begin{array}{rlrl}
+			\partial u/\partial x =& e^x \cos y  \hspace{1cm}&  \partial v/\partial y =& e^x \cos y\\
+			\partial u/\partial y =& -e^x \sin y \hspace{1cm}& -\partial v/\partial x =& -e^x \sin y
+		\end{array}
+	\]
+	Therefore $e^z$ satisfies the Cauchy-Riemann equations.
+	Furthermore, since the equations hold for all $z\in\CC$, $e^z$ is entire.
+\end{proof}
+
+\begin{proposition}
+	Let $z\in\CC$.
+	Then
+	\[
+		\cos z = \frac{ e^{iz} + e^{-iz} }{2} \text{ and } \sin z = \frac{ e^{iz} - e^{-iz} }{2i}.
+	\]
+\end{proposition}
+\begin{proof}
+	Since $e^z$ is entire, its Taylor series converges everywhere in $\CC$.
+	Take each right hand side, and replace $e^{iz}$ and $e^{-iz}$ with their respective Taylor expansions.
+	Doing so will yield the Taylor expansion of $\cos z$ and $\sin z$ respectively.
+	The details are left as an exercise.
+\end{proof}
+
+\subsection{Trigonometric Sum Identities}
+\begin{thm}
+	Let $z,w\in\CC$.
+	Then $\sin(z+w)=\cos z\sin w+\sin z\cos w$.
+\end{thm}
+\begin{proof}
+	Consider $\cos z\sin w+\sin z\cos w$.
+	\begin{align*}
+		\cos z\sin w+\sin z\cos w &=
+		\paren{\frac{e^{iz}+e^{-iz}}{2}}\paren{\frac{e^{iw}-e^{-iw}}{2i}}+\paren{\frac{e^{iz}-e^{-iz}}{2i}}\paren{\frac{e^{iw}+e^{-iw}}{2}}\\
+		&= \frac{e^{i(z+w)} +e^{i(w-z)} - e^{i(z-w)} - e^{-i(z+w)}}{4i} + \frac{e^{i(z+w)} -e^{i(w-z)} + e^{i(z-w)} - e^{-i(z+w)}}{4i}\\
+		&= \frac{2e^{i(z+w)}-2e^{-i(z+w)}}{4i}\\
+		&= \frac{e^{i(z+w)}-e^{-i(z+w)}}{2i}\\
+		&= \sin(z+w)
+	\end{align*}
+\end{proof}
+
+\begin{thm}
+	Let $z,w\in\CC$.
+	Then $\cos(z+w)=\cos z\cos w - \sin z\sin w$.
+\end{thm}
+\begin{proof}
+	Consider $\cos z\cos w - \sin z\sin w$.
+	\begin{align*}
+		\cos z\cos w - \sin z\sin w &=
+		\paren{\frac{e^{iz}+e^{-iz}}{2}}\paren{\frac{e^{iw}+e^{-iw}}{2}} - \paren{\frac{e^{iz}-e^{-iz}}{2i}}\paren{\frac{e^{iw}-e^{-iw}}{2i}}\\
+		&= \frac{e^{i(z+w)} + e^{i(w-z)} + e^{i(z-w)} + e^{-i(z+w)}}{4} + \frac{e^{i(z+w)} -e^{i(w-z)} - e^{i(z-w)} + e^{-i(z+w)}}{4}\\
+		&= \frac{e^{i(z+w)}+e^{-i(z+w)}}{2}\\
+		&= \cos(z+w)
+	\end{align*}
+\end{proof}
+
+\printbibliography
+
+\end{document}
