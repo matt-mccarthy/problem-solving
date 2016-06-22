@@ -11,8 +11,19 @@
 
 \maketitle
 
+\begin{problem*}
+	Show that for any $z,w\in\CC$,
+	\[
+		\sin(z+w)=\cos z\sin w+\sin z\cos w \text{ and } \cos(z+w)=\cos z\cos w - \sin z\sin w.
+	\]
+\end{problem*}
+
 \section{Background}
 
+In the world of $\CC$, differentiability is a stronger condition than in $\RR$.
+To be precise, once a function is differentiable in $\CC$, it is infinitely differentiable.
+This happens because differentiability has more stringent requirements in $\CC$.
+In order for a $\CC$-valued function to be differentiable on a domain, it must be \textit{analytic} on that domain.
 \begin{definition}
 	Let $f:\CC\rightarrow\CC$, where $f(x+iy)=u(x,y)+iv(x,y)$, be a function such that $\partial u/\partial x$, $\partial u/\partial y$, $\partial v/\partial x$, and $\partial v/\partial y$ exist and are continuous on some disk $D\subseteq\CC$ with a nonzero radius.
 	If $f$ satisfies the \textit{Cauchy-Riemann equations}
@@ -23,12 +34,24 @@
 	Furthermore, the largest subset of $\CC$ on which $f$ is analytic is called $f$'s \textit{domain of analyticity}.
 	If the domain of analyticity is $\CC$, then $f$ is said to be \textit{entire}.
 \end{definition}
-
+Since any analytic function is infinitely differentiable, its Taylor expansion exists as well.
+Furthermore, the Taylor series converges on any disk in the domain of analyticity.
 \begin{thm}
-	Let $f$ be analytic on a disk $D$, then the Taylor series for $f$ converges for all $z\in D$.
+	Let $f$ be analytic on a disk $D(z_0,r)$, then $f$'s Taylor series about $z_0$ converges for all $z\in D$.
 \end{thm}
 
 \section{Solution}
+
+\begin{problem*}
+	Show that for any $z,w\in\CC$,
+	\[
+		\sin(z+w)=\cos z\sin w+\sin z\cos w \text{ and } \cos(z+w)=\cos z\cos w - \sin z\sin w.
+	\]
+\end{problem*}
+
+Our solution will give $\sin z$ and $\cos z$ in terms of $e^z$.
+From there, we will show the sum formulae.
+However, before we can get to either of those steps, we need to show that $e^z$ is entire.
 
 \subsection{Analyticity of $e^{z}$}
 
@@ -55,6 +78,10 @@
 	Furthermore, since the equations hold for all $z\in\CC$, $e^z$ is entire.
 \end{proof}
 
+\subsection{Complex Trigonometric Functions in Terms of the Complex Exponential}
+
+Our next step is to use the Taylor expansion of $e^z$ to get the Taylor expansion of $\cos z$ and $\sin z$.
+
 \begin{proposition}
 	Let $z\in\CC$.
 	Then
@@ -63,13 +90,33 @@
 	\]
 \end{proposition}
 \begin{proof}
+	Consider $\paren{e^{iz}+e^{-iz}}/2$.
 	Since $e^z$ is entire, its Taylor series converges everywhere in $\CC$.
-	Take each right hand side, and replace $e^{iz}$ and $e^{-iz}$ with their respective Taylor expansions.
-	Doing so will yield the Taylor expansion of $\cos z$ and $\sin z$ respectively.
-	The details are left as an exercise.
+	\begin{align*}
+		\frac{1}{2}\paren{e^{iz}+e^{-iz}}
+		&= \frac{1}{2}\paren{\sum_{n=0}^\infty \frac{1}{n!} i^n z^n + \frac{(-1)^n}{n!} i^n z^n}\\
+		&= \frac{1}{2}\paren{\sum_{n=0}^\infty \frac{1+(-1)^n}{n!} i^n z^n}\\
+		&= \frac{1}{2}\paren{\sum_{n=0}^\infty \frac{1+(-1)^{2n}}{(2n)!}i^{2n}z^{2n} + \frac{1+(-1)^{2n+1}}{(2n+1)!}i^{2n+1}z^{2n+1}}\\
+		&= \frac{1}{2}\paren{\sum_{n=0}^\infty \frac{2}{(2n)!}(i^2)^nz^{2n}}\\
+		&= \sum_{n=0}^\infty \frac{(-1)^n}{(2n!)} z^{2n}\\
+		&= \cos z
+	\end{align*}
+	Consider $\paren{e^{iz}-e^{-iz}}/(2i)$.
+	\begin{align*}
+		\frac{1}{2i}\paren{e^{iz}-e^{-iz}}
+		&= \frac{1}{2i}\paren{\sum_{n=0}^\infty \frac{1}{n!} i^n z^n - \frac{(-1)^n}{n!} i^n z^n}\\
+		&= \frac{1}{2i}\paren{\sum_{n=0}^\infty \frac{1-(-1)^n}{n!} i^n z^n}\\
+		&= \frac{1}{2i}\paren{\sum_{n=0}^\infty \frac{1-(-1)^{2n}}{(2n)!}i^{2n}z^{2n} + \frac{1-(-1)^{2n+1}}{(2n+1)!}i^{2n+1}z^{2n+1}}\\
+		&= \frac{1}{2i}\paren{\sum_{n=0}^\infty \frac{2i}{(2n+1)!}(i^2)^nz^{2n+1}}\\
+		&= \sum_{n=0}^\infty \frac{(-1)^n}{(2n+1)!} z^{2n+1}\\
+		&= \sin z
+	\end{align*}
 \end{proof}
 
 \subsection{Trigonometric Sum Identities}
+
+We will now use our new identities to show the sum formulae, and get the difference formulae as corollaries.
+
 \begin{thm}
 	Let $z,w\in\CC$.
 	Then $\sin(z+w)=\cos z\sin w+\sin z\cos w$.
@@ -99,6 +146,19 @@
 		&= \frac{e^{i(z+w)}+e^{-i(z+w)}}{2}\\
 		&= \cos(z+w)
 	\end{align*}
+\end{proof}
+
+\begin{corollary}
+	Let $z,w\in\CC$.
+	Then
+	\[
+		\sin(z-w)=\sin z\cos w - \cos z\sin w \text{ and }\cos(z-w)=\cos z\cos w + \sin z\sin w.
+	\]
+\end{corollary}
+\begin{proof}
+	Since $\sin w$ is an odd function, $\sin(-w)=-\sin w$.
+	Since $\cos w$ is an even function, $\cos (-w)=\cos w$.
+	These facts combined with the sum formulas for $\cos(z+(-w))$ and $\sin(z+(-w))$ yield the difference formulae.
 \end{proof}
 
 \printbibliography
