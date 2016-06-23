@@ -1,0 +1,163 @@
+\documentclass[notitlepage]{problem-solving}
+
+\def\ord{\operatorname{ord}}
+
+\title{Sums Convergent under the $p$-adic Norm}
+\date{January 2016}
+\author{Matt McCarthy}
+
+\addbibresource{p-adic-sum.bib}
+\nocite{*}
+
+\begin{document}
+
+\maketitle
+
+\begin{problem*}
+	Show that
+	\[
+		\sum_{n=0}^\infty 2^n = -1
+	\]
+	under the 2-adic norm.
+\end{problem*}
+
+\section{Background}
+
+\begin{definition}[Metric Space]
+	Let $X$ be a non-empty set and let $d:X\times X\rightarrow \RR$ be a function.
+	Then $d$ is a \textit{metric} on $X$ if all of the following hold.
+	\begin{enumerate}
+		\item For all $x,y\in X$, $d(x,y)\geq 0$.
+		\item For all $x,y\in X$, $d(x,y) = 0$ iff $x=y$.
+		\item For all $x,y\in X$, $d(x,y)=d(y,x)$.
+		\item For all $x,y,z\in X$, $d(x,z)\leq d(x,y)+d(y,z)$ (triangle inequality).
+	\end{enumerate}
+	If $d$ is a metric on $X$, then we say $(X,d)$ forms a \textit{metric space}.
+\end{definition}
+
+\begin{definition}[Cauchy Sequence]
+	Let $(X,d)$ be a metric space and let $(a_n)_{n\in\NN}\subseteq X$.
+	We say $a_n$ is a \textit{Cauchy sequence} if for all $\varepsilon>0$, there exists an $N\in\NN$ such that $d(a_n,a_m)<\varepsilon$ for all $n,m\geq N$.
+\end{definition}
+
+\begin{definition}[Convergent Sequence]
+	Let $(X,d)$ be a metric space and let $(a_n)_{n\in\NN}\subseteq X$ and let $a\in X$.
+	We say $a_n$ is a \textit{converges} to $a$ if for all $\varepsilon>0$, there exists an $N\in\NN$ such that $d(a_n,a)<\varepsilon$ for all $n\geq N$.
+	If such an $a$ exists, we say $a_n$ is \textit{convergent in $X$}.
+\end{definition}
+
+\begin{definition}[Complete Metric Space]
+	Let $(X,d)$ be a metric space.
+	We say $X$ is \textit{complete} if all Cauchy sequences in $X$ converge in $X$.
+\end{definition}
+
+\begin{thm}
+	Let $(X,d)$ be a metric space.
+	Then $X$ has a unique completion, $C(X,d)$, up to isometry.
+\end{thm}
+
+\begin{definition}[$p$-adic Ordinal]
+	Let $p$ be a prime and let $a\in\ZZ$ be nonzero.
+	Then the \textit{$p$-adic ordinal} of $a$, denoted $\ord_p a$, is defined as
+	\[
+		\ord_p a = \max\set{n\text{ s.t. } p^n | a}.
+	\]
+	Furthermore, for any nonzero $x=b/c\in\QQ$,
+	\[
+		\ord_p x = \ord_p a - \ord_p b.
+	\]
+\end{definition}
+
+Using the definition of $p$-adic ordinal, we now provide the definition of the $p$-adic norm.
+
+\begin{definition}[$p$-adic Norm]
+	Let $p$ be a prime and $x\in\QQ$.
+	Then the \textit{$p$-adic norm of $x$}, denoted $|x|_p$, is defined as
+	\[
+		|x|_p =
+		\begin{cases}
+			p^{-\ord_p x} & x\neq 0\\
+			0 & x=0.
+		\end{cases}
+	\]
+\end{definition}
+
+\begin{definition}[$p$-adic Numbers]
+	The set of \textit{$p$-adic numbers} is the completion of the metric space $(\QQ,|\cdot|_p)$.
+\end{definition}
+
+\begin{thm}[Strong Triangle Inequality]
+	For all $x,y\in\QQ_p$, $|x-y|_p\leq\max\set{|x|_p,|y|_p}$.
+\end{thm}
+
+\section{Solution}
+
+\begin{problem*}
+	Show that
+	\[
+		\sum_{n=0}^\infty 2^n = -1
+	\]
+	under the 2-adic norm.
+\end{problem*}
+
+\begin{thm}
+	Let $(a_n)_{n\in\NN}\subseteq\QQ_p$ such that $a_n\rightarrow 0$.
+	Then $\sum_{n=0}^\infty a_n$ converges in $\QQ_p$.
+\end{thm}
+\begin{proof}
+	Let $\varepsilon > 0$ be given.
+	Since $a_n\rightarrow 0$, there exists an $N\in\NN$ such that $|a_n|<\varepsilon$.
+	Force $n\geq m\geq N$.
+	Consider $|\sum_{k=0}^n a_k - \sum_{k=0}^m|_p$.
+	\[
+		\abs{\sum_{k=0}^n a_k - \sum_{k=0}^m}_p a_k = \abs{\sum_{k=m+1}^n a_k}_p
+	\]
+	Thus, by the strong triangle inequality,
+	\[
+		\abs{\sum_{k=0}^n a_k - \sum_{k=0}^m a_k}_p \leq \max\limits_{m+1\leq k\leq n}\set{|a_k|_p}.
+	\]
+	However, we know that for each $k\geq N$, $|a_k|_p<\varepsilon$.
+	Therefore,
+	\[
+		\abs{\sum_{k=0}^n a_k - \sum_{k=0}^m a_k}_p < \varepsilon
+	\]
+	and $\paren{\sum_{k=0}^n a_k}_{n\in\NN}$ is Cauchy in $\QQ_p$.
+	Since $\QQ_p$ is defined as a complete metric space, $\paren{\sum_{k=0}^n a_k}_{n\in\NN}$ converges in $\QQ_p$.
+\end{proof}
+
+\begin{lemma}
+	Under the 2-adic metric, $2^n\rightarrow 0$.
+\end{lemma}
+\begin{proof}
+	Let $\varepsilon > 0$ be given.
+	Without loss of generality, assume $\varepsilon < 1$.
+	Thus, $\lg\varepsilon < 0$.
+	Take $N > -\lg\varepsilon$ and let $n\geq N$.
+	Then
+	\[
+		|2^n|_2 = 2^{-n} \leq 2^{-N} < 2^{\lg\varepsilon} = \varepsilon.
+	\]
+	Therefore, $2^n\rightarrow 0$ under $|\cdot|_2$.
+\end{proof}
+
+\begin{proposition}
+	In $\QQ_2$,
+	\[
+		\sum_{n=0}^\infty 2^n = -1.
+	\]
+\end{proposition}
+\begin{proof}
+	Since $2^n\rightarrow 0$, $\sum_{n=0}^\infty 2^n$ converges to some $S\in\QQ_p$.
+	Consider $S$.
+	\[
+		S= \sum_{n=0}^\infty 2^n = 1 + \sum_{n=1}^\infty 2^n = 1+ 2\sum_{n=1}^\infty 2^{n-1} = 1+ 2 \sum_{n=0} 2^n = 1+ 2S
+	\]
+	Solving for $S$ yields,
+	\[
+		S = -1.
+	\]
+\end{proof}
+
+\printbibliography
+
+\end{document}
