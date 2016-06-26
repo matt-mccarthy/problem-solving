@@ -17,6 +17,31 @@
 
 \section{Background}
 
+\begin{definition}[Category]
+	A \textit{category}, $C$ consists of the following.
+	\begin{enumerate}
+		\item A class of \textit{objects}, denoted $Obj(C)$.
+		\item A class of \textit{arrows}, denoted $Arr(C)$.
+		Each arrow $f\in Arr(C)$ has a source object $A\in Obj(C)$, a target object $B\in Obj(C)$, and is denoted $f:A\rightarrow B$.
+		We denote the class of all arrows going from $A\in Obj(C)$ to $B\in Obj(C)$ as $C[A,B]$.
+		\item A partial composition $\circ:Arr(C)\times Arr(C)\rightarrow Arr(C)$ such that for any $f:A\rightarrow B,g:B\rightarrow D$, $gf:A\rightarrow D\in Arr(C)$.
+	\end{enumerate}
+	Furthermore, the following axioms must hold.
+	\begin{enumerate}
+		\item For all $f:A\rightarrow B,g:B\rightarrow D,h:D\rightarrow E\in Arr(C)$, $h(gf) = (hg)f$.
+		\item For all $A\in Obj(C)$, there exists an $id_A\in C[A,A]$ such that for all arrows $f:X\rightarrow A$, $g:A\rightarrow Y$ $id_A\, f =f$ and $g\, id_A = g$.
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}[Monoid]
+	Let $M$ be a set, and let $*:M^2\rightarrow M$ be a binary operation.
+	Then $(M,*)$ forms a \textit{monoid} if all of the following are satisfied.
+	\begin{enumerate}
+		\item For all $a,b,c\in M$, $a*(b*c)=(a*b)*c$.
+		\item There exists an $e\in M$ such that for all $a\in M$, $e*a=a*e=a$.
+	\end{enumerate}
+\end{definition}
+
 \section{Solution}
 
 \begin{thm}
@@ -46,6 +71,12 @@
 	\[
 		A \xrightarrow{f(gh)} A = A\xrightarrow{gh} A \xrightarrow{f} = A\xrightarrow{h} A\xrightarrow{g} A\xrightarrow{f} A
 	\]
+	Now consider $(fg)h$.
+	\[
+		A \xrightarrow{(fg)h} A = A\xrightarrow{h} A\xrightarrow{fg} A = A\xrightarrow{h} A\xrightarrow{g} A\xrightarrow{f}A
+	\]
+	Therefore, $(fg)h=f(gh)$ and $C[A,A]$ is associative with respect to arrow composition.
+	Thus, $C[A,A]$ forms a monoid under arrow composition.
 \end{proof}
 
 
