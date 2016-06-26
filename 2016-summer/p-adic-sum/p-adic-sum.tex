@@ -3,7 +3,7 @@
 \def\ord{\operatorname{ord}}
 
 \title{Sums Convergent under the $p$-adic Norm}
-\date{January 2016}
+\date{June 2016}
 \author{Matt McCarthy}
 
 \addbibresource{p-adic-sum.bib}
@@ -18,11 +18,12 @@
 	\[
 		\sum_{n=0}^\infty 2^n = -1
 	\]
-	under the 2-adic norm.
+	under the 2-adic metric.
 \end{problem*}
 
 \section{Background}
 
+In order to talk about limits, we first need to understand the concept of a metric.
 \begin{definition}[Metric Space]
 	Let $X$ be a non-empty set and let $d:X\times X\rightarrow \RR$ be a function.
 	Then $d$ is a \textit{metric} on $X$ if all of the following hold.
@@ -34,28 +35,33 @@
 	\end{enumerate}
 	If $d$ is a metric on $X$, then we say $(X,d)$ forms a \textit{metric space}.
 \end{definition}
-
-\begin{definition}[Cauchy Sequence]
-	Let $(X,d)$ be a metric space and let $(a_n)_{n\in\NN}\subseteq X$.
-	We say $a_n$ is a \textit{Cauchy sequence} if for all $\varepsilon>0$, there exists an $N\in\NN$ such that $d(a_n,a_m)<\varepsilon$ for all $n,m\geq N$.
-\end{definition}
-
+After defining the metric space, we can consider whether or not a sequence in that space converges.
 \begin{definition}[Convergent Sequence]
 	Let $(X,d)$ be a metric space and let $(a_n)_{n\in\NN}\subseteq X$ and let $a\in X$.
 	We say $a_n$ is a \textit{converges} to $a$ if for all $\varepsilon>0$, there exists an $N\in\NN$ such that $d(a_n,a)<\varepsilon$ for all $n\geq N$.
 	If such an $a$ exists, we say $a_n$ is \textit{convergent in $X$}.
 \end{definition}
-
+Furthermore, if a sequence is convergent in a metric space, it is also Cauchy in that space.
+\begin{definition}[Cauchy Sequence]
+	Let $(X,d)$ be a metric space and let $(a_n)_{n\in\NN}\subseteq X$.
+	We say $a_n$ is a \textit{Cauchy sequence} if for all $\varepsilon>0$, there exists an $N\in\NN$ such that $d(a_n,a_m)<\varepsilon$ for all $n,m\geq N$.
+\end{definition}
+While convergent implies Cauchy, the other way does not always hold.
+For example in $\QQ$ under the Euclidean metric ($d(x,y)=|x-y|$), the sequence defined by $(1+1/n)^n$ is Cauchy but not convergent.
+However, if we move to $\RR$, $(1+1/n)^n$ converges to $e$.
+Cauchy sequences are sequences that \textit{should} be convergent in our space.
+If they are not, then we need to move to what is called the completion of the metric space.
 \begin{definition}[Complete Metric Space]
 	Let $(X,d)$ be a metric space.
 	We say $X$ is \textit{complete} if all Cauchy sequences in $X$ converge in $X$.
 \end{definition}
-
 \begin{thm}
 	Let $(X,d)$ be a metric space.
 	Then $X$ has a unique completion, $C(X,d)$, up to isometry.
 \end{thm}
 
+Now that we have enough background in analysis, lets talk about the $p$-adic numbers.
+Before we can define the $p$-adic's, we need to introduce the $p$-adic ordinal and $p$-adic absolute value first.
 \begin{definition}[$p$-adic Ordinal]
 	Let $p$ be a prime and let $a\in\ZZ$ be nonzero.
 	Then the \textit{$p$-adic ordinal} of $a$, denoted $\ord_p a$, is defined as
@@ -67,10 +73,8 @@
 		\ord_p x = \ord_p a - \ord_p b.
 	\]
 \end{definition}
-
-Using the definition of $p$-adic ordinal, we now provide the definition of the $p$-adic norm.
-
-\begin{definition}[$p$-adic Norm]
+Using the definition of $p$-adic ordinal, we now provide the definition of the $p$-adic absolute value.
+\begin{definition}[$p$-adic absolute value]
 	Let $p$ be a prime and $x\in\QQ$.
 	Then the \textit{$p$-adic norm of $x$}, denoted $|x|_p$, is defined as
 	\[
@@ -81,13 +85,15 @@ Using the definition of $p$-adic ordinal, we now provide the definition of the $
 		\end{cases}
 	\]
 \end{definition}
-
+While an absolute value is not a metric in and of itself, it generates a metric.
+Just like the regular absolute value generates the metric $d(x,y)=|x-y|$, the $p$-adic absolute value uses $|x-y|_p$ as a metric.
+With this, we can define the $p$-adic numbers.
 \begin{definition}[$p$-adic Numbers]
 	The set of \textit{$p$-adic numbers} is the completion of the metric space $(\QQ,|\cdot|_p)$.
 \end{definition}
-
+Additionally, $\QQ_p$ satisfies a stronger version of the triangle inequality, that is the distance between any two elements is no more than the maximum of the distances to a third element.
 \begin{thm}[Strong Triangle Inequality]
-	For all $x,y\in\QQ_p$, $|x-y|_p\leq\max\set{|x|_p,|y|_p}$.
+	For all $x,y\in\QQ_p$, $|x+y|_p\leq\max\set{|x|_p,|y|_p}$.
 \end{thm}
 
 \section{Solution}
@@ -99,6 +105,8 @@ Using the definition of $p$-adic ordinal, we now provide the definition of the $
 	\]
 	under the 2-adic norm.
 \end{problem*}
+
+To start our solution, we prove that if a sequence in $\QQ_p$ converges to 0 under the $p$-adic metric, the infinite sum of all of its terms is convergent in $\QQ_p$.
 
 \begin{thm}
 	Let $(a_n)_{n\in\NN}\subseteq\QQ_p$ such that $a_n\rightarrow 0$.
@@ -125,6 +133,8 @@ Using the definition of $p$-adic ordinal, we now provide the definition of the $
 	Since $\QQ_p$ is defined as a complete metric space, $\paren{\sum_{k=0}^n a_k}_{n\in\NN}$ converges in $\QQ_p$.
 \end{proof}
 
+Now, in order to show that $\sum_{n=0}^\infty 2^n$ converges with respect to the $p$-adic metric, we show that $2^n\rightarrow 0$ with respect to the $p$-adic metric.
+
 \begin{lemma}
 	Under the 2-adic metric, $2^n\rightarrow 0$.
 \end{lemma}
@@ -139,6 +149,8 @@ Using the definition of $p$-adic ordinal, we now provide the definition of the $
 	\]
 	Therefore, $2^n\rightarrow 0$ under $|\cdot|_2$.
 \end{proof}
+
+From here, we do some algebraic manipulation to find the limit point.
 
 \begin{proposition}
 	In $\QQ_2$,
