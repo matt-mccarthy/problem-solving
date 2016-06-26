@@ -1,0 +1,52 @@
+\documentclass[notitlepage]{problem-solving}
+
+\usepackage{mathtools}
+
+\author{Matt McCarthy}
+\date{June 2016}
+\title{Generating Monoids from Categories}
+
+\begin{document}
+
+\maketitle
+
+\begin{thm*}
+	Let $C$ be a category and let $A$ be an object in $C$.
+	Then $C[A,A]$ forms a monoid under arrow composition.
+\end{thm*}
+
+\section{Background}
+
+\section{Solution}
+
+\begin{thm}
+	Let $C$ be a category and let $A$ be an object in $C$.
+	Then $C[A,A]$ forms a monoid under arrow composition.
+\end{thm}
+\begin{proof}
+	Let $f,g\in C[A,A]$.
+	Then
+	\[
+		A \xrightarrow{f} A \xrightarrow{g} A
+	\]
+	and thus
+	\[
+		A \xrightarrow{fg} A.
+	\]
+	Therefore, arrow composition forms a binary operation on $C[A,A]$.
+
+	Next, we claim that $id_A$ is the identity for $C[A,A]$ with respect to arrow composition.
+	Let $f\in C[A,A]$.
+	Then, by definition, we know that $f\, id_A = id_A\, f = f$.
+	Thus, $id_A$ is the identity for $C[A,A]$ with respect to arrow composition.
+
+	Lastly, we must show that arrow composition is associative for all arrows in $C[A,A]$.
+	Let $f,g,h\in C[A,A]$.
+	Consider $f(gh)$.
+	\[
+		A \xrightarrow{f(gh)} A = A\xrightarrow{gh} A \xrightarrow{f} = A\xrightarrow{h} A\xrightarrow{g} A\xrightarrow{f} A
+	\]
+\end{proof}
+
+
+\end{document}
