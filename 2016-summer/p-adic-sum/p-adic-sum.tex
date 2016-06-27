@@ -58,6 +58,7 @@ If they are not, then we need to move to what is called the completion of the me
 \begin{thm}
 	Let $(X,d)$ be a metric space.
 	Then $X$ has a unique completion, $C(X,d)$, up to isometry.
+	Furthermore, this completion is isometric to the space $(B(X),D)$ where $B(X)$ is the set of all bounded functions from $X$ to $\RR$, and $D(f,g)=\sup_{x\in X} |f(x)-g(x)|$.
 \end{thm}
 
 Now that we have enough background in analysis, lets talk about the $p$-adic numbers.
@@ -66,7 +67,7 @@ Before we can define the $p$-adic's, we need to introduce the $p$-adic ordinal a
 	Let $p$ be a prime and let $a\in\ZZ$ be nonzero.
 	Then the \textit{$p$-adic ordinal} of $a$, denoted $\ord_p a$, is defined as
 	\[
-		\ord_p a = \max\set{n\text{ s.t. } p^n | a}.
+		\ord_p a = \max\set{n\,:\, p^n | a}.
 	\]
 	Furthermore, for any nonzero $x=b/c\in\QQ$,
 	\[
@@ -76,7 +77,7 @@ Before we can define the $p$-adic's, we need to introduce the $p$-adic ordinal a
 Using the definition of $p$-adic ordinal, we now provide the definition of the $p$-adic absolute value.
 \begin{definition}[$p$-adic absolute value]
 	Let $p$ be a prime and $x\in\QQ$.
-	Then the \textit{$p$-adic norm of $x$}, denoted $|x|_p$, is defined as
+	Then the \textit{$p$-adic absolute value of $x$}, denoted $|x|_p$, is defined as
 	\[
 		|x|_p =
 		\begin{cases}
@@ -86,7 +87,7 @@ Using the definition of $p$-adic ordinal, we now provide the definition of the $
 	\]
 \end{definition}
 While an absolute value is not a metric in and of itself, it generates a metric.
-Just like the regular absolute value generates the metric $d(x,y)=|x-y|$, the $p$-adic absolute value uses $|x-y|_p$ as a metric.
+Similarly to how we use $|x-y|$ as a metric, we use $|x-y|_p$ as the $p$-adic metric.
 With this, we can define the $p$-adic numbers.
 \begin{definition}[$p$-adic Numbers]
 	The set of \textit{$p$-adic numbers} is the completion of the metric space $(\QQ,|\cdot|_p)$.
@@ -107,6 +108,7 @@ Additionally, $\QQ_p$ satisfies a stronger version of the triangle inequality.
 \end{problem*}
 
 To start our solution, we prove that if a sequence in $\QQ_p$ converges to 0 under the $p$-adic metric, the infinite sum of all of its terms is convergent in $\QQ_p$.
+While this result is not true in $\RR$ (e.g. the harmonic series), it works in $\QQ_p$ because of the strong triangle inequality.
 
 \begin{thm}
 	Let $(a_n)_{n\in\NN}\subseteq\QQ_p$ such that $a_n\rightarrow 0$.
